@@ -1,5 +1,6 @@
 package info.quadtree.ld41;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -13,20 +14,34 @@ public class GameState {
 
     long ticksDone = 0;
 
+    public OrthographicCamera cam = new OrthographicCamera();
+
     public GameState(){
         world = new World(new Vector2(0,0), true);
     }
 
     public void render(){
+
+
         if (ticksDone < System.currentTimeMillis()){
             update();
             ticksDone += 16;
         }
 
+        cam.setToOrtho(false);
+        cam.zoom = 3.f / 32.f;
+        cam.position.x = 20;
+        cam.position.y = 20;
+        cam.update();
+
+        LD41.s.batch.setProjectionMatrix(cam.combined);
+        LD41.s.batch.begin();
+
         for (int i=0;i<actors.size();++i){
             if (actors.get(i).keep())
                 actors.get(i).render();
         }
+        LD41.s.batch.end();
     }
 
     public void update(){
