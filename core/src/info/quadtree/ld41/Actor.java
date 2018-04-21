@@ -48,5 +48,6 @@ public class Actor {
     protected boolean isSensor(){ return false; }
 
     protected void collidedWith(Actor a){}
+    protected void stopCollideWith(Actor a){}
     protected boolean hasFixture(){ return true; }
 }

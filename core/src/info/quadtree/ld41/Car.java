@@ -3,6 +3,9 @@ package info.quadtree.ld41;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Car extends Actor {
     public float steering;
     public float acceleration;
@@ -17,6 +20,8 @@ public class Car extends Actor {
     public float turnIn = MathUtils.random();
 
     public float slideTime = 0;
+
+    Set<Actor> collidingWith = new HashSet<Actor>();
 
     public Car(Vector2 startPos) {
         super(startPos);
@@ -60,9 +65,14 @@ public class Car extends Actor {
 
             body.applyLinearImpulse(ssf, body.getWorldCenter(), true);
 
+            float drag = 0.1f;
+
+            for (Actor a : collidingWith){
+                if (a instanceof Car) drag += 0.1f;
+            }
 
             // drag
-            body.applyLinearImpulse(body.getLinearVelocity().cpy().scl(-0.1f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(body.getLinearVelocity().cpy().scl(-drag), body.getWorldCenter(), true);
         }
 
         slideTime = Math.max(slideTime - 0.016f, 0);
@@ -105,6 +115,15 @@ public class Car extends Actor {
             slideTime = 5;
             body.applyAngularImpulse(MathUtils.random(-200, 200), true);
         }
+
+        collidingWith.add(a);
+    }
+
+    @Override
+    protected void stopCollideWith(Actor a) {
+        super.stopCollideWith(a);
+
+        collidingWith.remove(a);
     }
 
     public void fireOilSlick(){

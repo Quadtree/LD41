@@ -118,7 +118,13 @@ public class GameState implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
+        Object oa = contact.getFixtureA().getBody().getUserData();
+        Object ob = contact.getFixtureB().getBody().getUserData();
 
+        if (oa instanceof Actor && ob instanceof Actor){
+            ((Actor) oa).stopCollideWith((Actor)ob);
+            ((Actor) ob).stopCollideWith((Actor)oa);
+        }
     }
 
     @Override
