@@ -24,6 +24,9 @@ public class GameState implements ContactListener {
 
     Vector2 camPos = new Vector2();
 
+    boolean hasWon = false;
+    boolean hasLost = false;
+
     public GameState(){
         world = new World(new Vector2(0,0), true);
 
@@ -134,6 +137,12 @@ public class GameState implements ContactListener {
         }
 
         world.step(0.016f, 2, 2);
+
+        if (getCarsLeft() == 1 && pcCar != null){
+            hasWon = true;
+        }
+
+        if (pcCar == null) hasLost = true;
     }
 
     @Override

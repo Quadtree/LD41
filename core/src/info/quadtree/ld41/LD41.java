@@ -25,6 +25,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public GameState gs;
 
 	public BitmapFont defaultFont;
+	public BitmapFont bigFont;
 
 	public static final boolean CHEATS = true;
 	public static final boolean DEBUG_PHYSICS = false;
@@ -74,6 +75,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		gs.init();
 
 		defaultFont = new BitmapFont(Gdx.files.internal("aldrich_24.fnt"));
+		bigFont = new BitmapFont(Gdx.files.internal("aldrich_90.fnt"));
 
 		Gdx.input.setInputProcessor(this);
 	}
@@ -88,11 +90,24 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 		batch.setProjectionMatrix(origProj.cpy());
 		batch.begin();
+
+		if (gs.hasLost){
+			Util.drawTextCentered("You have lost!", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 120);
+			Util.drawTextCentered("Press R to restart", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		}
+
+		if (gs.hasWon){
+			Util.drawTextCentered("You have won!", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 120);
+			Util.drawTextCentered("Press R to restart", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		}
+
 		if (CHEATS) defaultFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 40, 40);
 
 		//defaultFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond() + " Position: " + gs.getPlayerPosition() + "/" + gs.getCarsLeft() + " Speed: " + (int)(gs.pcCar != null ? gs.pcCar.body.getLinearVelocity().len() : 0), 40, 40);
-		defaultFont.draw(batch, Objects.toString((int)(gs.pcCar != null ? gs.pcCar.body.getLinearVelocity().len() : 0)), Gdx.graphics.getWidth() - 40, Gdx.graphics.getHeight() - 5);
-		defaultFont.draw(batch, gs.getPlayerPosition() + "/" + gs.getCarsLeft(), 5, Gdx.graphics.getHeight() - 5);
+		if (gs.pcCar != null) {
+			defaultFont.draw(batch, Objects.toString((int) (gs.pcCar != null ? gs.pcCar.body.getLinearVelocity().len() : 0)), Gdx.graphics.getWidth() - 40, Gdx.graphics.getHeight() - 5);
+			defaultFont.draw(batch, gs.getPlayerPosition() + "/" + gs.getCarsLeft(), 5, Gdx.graphics.getHeight() - 5);
+		}
 
 		batch.end();
 
