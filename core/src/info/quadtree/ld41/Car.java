@@ -114,11 +114,11 @@ public class Car extends Actor {
         if (body.getLinearVelocity().len() < 2f){
             stuckTime += 0.016f;
         } else {
-            stuckTime -= 0.1f;
+            stuckTime = Math.max(0, stuckTime - .1f);
         }
 
         //Vector2 delta = trgDest.cpy().sub(body.getPosition());
-        if (stuckTime < 1.5f) {
+        if (stuckTime < 0.5f) {
             acceleration = 1;
         } else {
             acceleration = -1;

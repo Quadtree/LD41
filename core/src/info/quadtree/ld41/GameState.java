@@ -37,14 +37,18 @@ public class GameState implements ContactListener {
         actors.add(new Wall(new Vector2(2.5f, 1499), MathUtils.PI / 2));
         actors.add(new Wall(new Vector2(-1.5f, 1499), MathUtils.PI / 2));
 
+        int n = 0;
+
         for (int i=0;i<20;++i){
             for (int j=0;j<5;++j){
                 Actor tmp = new Car(new Vector2((i - 10) * 4 + 2, j * 4));
                 actors.add(tmp);
 
-                if (j == 0 && i == 10) pcCar = (Car)tmp;
+                if (MathUtils.random(n++) == 0) pcCar = (Car)tmp;
             }
         }
+
+        //pcCar = (Car)actors.stream().filter(it -> it instanceof Car).reduce((a, b) -> MathUtils.randomBoolean() ? a : b).get();
 
         pcCar.hasAi = false;
         pcCar.color = new Color(0,0,1,1);
@@ -68,10 +72,11 @@ public class GameState implements ContactListener {
         cam.zoom = 3.f / 32.f;
 
         if (pcCar != null) {
-            Vector2 camTrg = pcCar.body.getPosition().cpy().add(new Vector2(30, 0).rotateRad(pcCar.body.getAngle()));
+            Vector2 camTrg = pcCar.body.getPosition().cpy().add(new Vector2(0, 10));
 
-            camPos.x = (camPos.x * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.x);
-            camPos.y = (camPos.y * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.y);
+            //camPos.x = (camPos.x * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.x);
+            //camPos.y = (camPos.y * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.y);
+            camPos.set(camTrg);
         }
         cam.position.x = camPos.x;
         cam.position.y = camPos.y;
