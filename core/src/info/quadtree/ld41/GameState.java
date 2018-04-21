@@ -68,7 +68,7 @@ public class GameState implements ContactListener {
         cam.zoom = 3.f / 32.f;
 
         if (pcCar != null) {
-            Vector2 camTrg = pcCar.body.getPosition().cpy().add(pcCar.body.getLinearVelocity().cpy().scl(1));
+            Vector2 camTrg = pcCar.body.getPosition().cpy().add(new Vector2(30, 0).rotateRad(pcCar.body.getAngle()));
 
             camPos.x = (camPos.x * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.x);
             camPos.y = (camPos.y * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.y);
