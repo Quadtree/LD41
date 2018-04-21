@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 
@@ -22,13 +24,29 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	public BitmapFont defaultFont;
 
-	public boolean CHEATS = true;
+	public static final boolean CHEATS = true;
+	public static final boolean DEBUG_PHYSICS = false;
+
+	public Sprite carWheels;
+	public Sprite carBody;
+	public Sprite carCanopy;
+	public Sprite solid;
+
+	public TextureAtlas atlas;
 
 	Matrix4 origProj = new Matrix4();
 	
 	@Override
 	public void create () {
 		LD41.s = this;
+
+		atlas = new TextureAtlas(Gdx.files.internal("main.atlas"));
+
+		carWheels = atlas.createSprite("car1_wheels");
+		carBody = atlas.createSprite("car1_body");
+		carCanopy = atlas.createSprite("car1_canopy");
+		solid = atlas.createSprite("solid");
+
 		batch = new SpriteBatch();
 		origProj = batch.getProjectionMatrix().cpy();
 		img = new Texture("badlogic.jpg");

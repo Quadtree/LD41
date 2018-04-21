@@ -1,6 +1,6 @@
 package info.quadtree.ld41;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -11,7 +11,7 @@ public class Wall extends Actor {
     }
 
     @Override
-    protected TextureRegion getTextureRegion() {
+    protected Sprite getTextureRegion() {
         return super.getTextureRegion();
     }
 

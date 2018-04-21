@@ -91,8 +91,10 @@ public class GameState implements ContactListener {
 
         LD41.s.batch.end();
 
-        //Box2DDebugRenderer rnd = new Box2DDebugRenderer();
-        //rnd.render(world, cam.combined);
+        if (LD41.DEBUG_PHYSICS) {
+            Box2DDebugRenderer rnd = new Box2DDebugRenderer();
+            rnd.render(world, cam.combined);
+        }
     }
 
     public void update(){

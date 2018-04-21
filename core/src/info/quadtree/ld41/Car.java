@@ -1,5 +1,6 @@
 package info.quadtree.ld41;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
@@ -22,6 +23,8 @@ public class Car extends Actor {
     public float slideTime = 0;
 
     public int oilSlickCharge = 0;
+
+    public Color color = Color.WHITE;
 
     int shootOdds = 1800;
 
@@ -168,5 +171,13 @@ public class Car extends Actor {
     @Override
     public boolean keep() {
         return isAlive;
+    }
+
+    @Override
+    public void render() {
+        //LD41.s.carBody.setColor();
+        doRender(LD41.s.carWheels, Color.WHITE);
+        doRender(LD41.s.carBody, color);
+        doRender(LD41.s.carCanopy, Color.WHITE);
     }
 }
