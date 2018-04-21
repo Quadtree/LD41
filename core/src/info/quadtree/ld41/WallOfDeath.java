@@ -51,4 +51,9 @@ public class WallOfDeath extends Actor {
             ((Car) a).isAlive = false;
         }
     }
+
+    @Override
+    protected int getRenderPass() {
+        return 4;
+    }
 }

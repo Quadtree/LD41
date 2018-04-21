@@ -53,4 +53,9 @@ public class OilBomb extends Actor {
 
         if (a instanceof Wall) hitSomething();
     }
+
+    @Override
+    protected int getRenderPass() {
+        return 3;
+    }
 }

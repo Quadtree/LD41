@@ -42,4 +42,9 @@ public class OilSlick extends Actor {
     public boolean keep() {
         return oilLeft > 0;
     }
+
+    @Override
+    protected int getRenderPass() {
+        return 1;
+    }
 }

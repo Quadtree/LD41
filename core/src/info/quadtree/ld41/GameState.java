@@ -80,9 +80,11 @@ public class GameState implements ContactListener {
         LD41.s.batch.setProjectionMatrix(cam.combined);
         LD41.s.batch.begin();
 
-        for (int i=0;i<actors.size();++i){
-            if (actors.get(i).keep())
-                actors.get(i).render();
+        for (int pass=0;pass<4;++pass) {
+            for (int i = 0; i < actors.size(); ++i) {
+                if (actors.get(i).getRenderPass() == pass)
+                    actors.get(i).render();
+            }
         }
 
 

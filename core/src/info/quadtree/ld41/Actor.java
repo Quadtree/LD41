@@ -11,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 public class Actor {
     Body body;
 
+
+
     public Actor(Vector2 startPos){
         BodyDef bd = new BodyDef();
         bd.type = getBodyType();
@@ -50,6 +52,7 @@ public class Actor {
     protected void collidedWith(Actor a){}
     protected void stopCollideWith(Actor a){}
     protected boolean hasFixture(){ return true; }
+    protected int getRenderPass(){ return 2;}
 
     public void destroyed(){
         LD41.s.gs.world.destroyBody(body);
