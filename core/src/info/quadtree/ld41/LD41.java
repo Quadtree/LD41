@@ -22,6 +22,8 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	public BitmapFont defaultFont;
 
+	public boolean CHEATS = true;
+
 	Matrix4 origProj = new Matrix4();
 	
 	@Override
@@ -83,6 +85,10 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		if (keycode == Input.Keys.D){
 			turnRight = true;
 			return true;
+		}
+
+		if (keycode == Input.Keys.U) {
+			gs.pcCar.body.setTransform(gs.pcCar.body.getPosition().cpy().add(0, 200), gs.pcCar.body.getAngle());
 		}
 
 		return false;

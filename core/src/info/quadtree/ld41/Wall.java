@@ -22,6 +22,6 @@ public class Wall extends Actor {
 
     @Override
     protected Vector2 getSize() {
-        return new Vector2(1000, 1);
+        return new Vector2(1500, 1);
     }
 }

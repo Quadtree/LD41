@@ -29,12 +29,18 @@ public class GameState {
     }
 
     public void init(){
-        actors.add(new Wall(new Vector2(60, 0), MathUtils.PI / 2));
+        actors.add(new Wall(new Vector2(47.3f, 0), MathUtils.PI / 2 + 0.06f));
+        actors.add(new Wall(new Vector2(-46.3f, 0), MathUtils.PI / 2 - 0.06f));
+
+        actors.add(new Wall(new Vector2(2.5f, 1499), MathUtils.PI / 2));
+        actors.add(new Wall(new Vector2(-1.5f, 1499), MathUtils.PI / 2));
 
         for (int i=0;i<20;++i){
             for (int j=0;j<5;++j){
-                pcCar = new Car(new Vector2((i - 5) * 4, j * 4));
-                actors.add(pcCar);
+                Actor tmp = new Car(new Vector2((i - 10) * 4 + 2, j * 4));
+                actors.add(tmp);
+
+                if (j == 0 && i == 10) pcCar = (Car)tmp;
             }
         }
 
