@@ -17,7 +17,7 @@ public class Car extends Actor {
 
     public float stuckTime = 0;
 
-    public float turnIn = MathUtils.random();
+    public float turnIn = MathUtils.random() * 250;
 
     public float slideTime = 0;
 
@@ -93,7 +93,7 @@ public class Car extends Actor {
     }
 
     private void runAi(){
-        Vector2 trgDest = new Vector2(MathUtils.clamp(body.getPosition().x * turnIn - body.getPosition().y * 0.25f, 0, 1000), body.getPosition().y + 30);
+        Vector2 trgDest = new Vector2(body.getPosition().y < turnIn ? body.getPosition().x : 0, body.getPosition().y + 30);
 
         float leftDst = new Vector2(1, 0).rotateRad(body.getAngle() + 0.02f).add(body.getPosition()).dst2(trgDest);
         float rightDst = new Vector2(1, 0).rotateRad(body.getAngle() - 0.02f).add(body.getPosition()).dst2(trgDest);
