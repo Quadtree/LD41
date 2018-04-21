@@ -31,6 +31,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public Sprite carBody;
 	public Sprite carCanopy;
 	public Sprite solid;
+	public Sprite wallOfDeath;
 
 	public TextureAtlas atlas;
 
@@ -46,6 +47,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		carBody = atlas.createSprite("car1_body");
 		carCanopy = atlas.createSprite("car1_canopy");
 		solid = atlas.createSprite("solid");
+		wallOfDeath = atlas.createSprite("wall_of_death");
 
 		batch = new SpriteBatch();
 		origProj = batch.getProjectionMatrix().cpy();

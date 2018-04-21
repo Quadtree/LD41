@@ -71,7 +71,7 @@ public class Actor {
 
     public boolean keep(){ return true; }
 
-    protected TextureRegion getTextureRegion(){ return new TextureRegion(LD41.s.img); }
+    protected TextureRegion getTextureRegion(){ return LD41.s.solid; }
     protected BodyDef.BodyType getBodyType(){ return BodyDef.BodyType.DynamicBody; }
     protected Vector2 getSize(){ return new Vector2(3,3); }
     protected boolean isSensor(){ return false; }

@@ -13,14 +13,14 @@ car1_body
   index: -1
 car1_canopy
   rotate: false
-  xy: 36, 36
+  xy: 70, 36
   size: 32, 24
   orig: 32, 24
   offset: 0, 0
   index: -1
 car1_wheels
   rotate: false
-  xy: 36, 10
+  xy: 36, 2
   size: 32, 24
   orig: 32, 24
   offset: 0, 0
@@ -28,6 +28,13 @@ car1_wheels
 solid
   rotate: false
   xy: 2, 28
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+wall_of_death
+  rotate: false
+  xy: 36, 28
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
