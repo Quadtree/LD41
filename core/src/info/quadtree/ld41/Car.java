@@ -111,7 +111,7 @@ public class Car extends Actor {
             acceleration = -1;
         }
 
-        if (MathUtils.random(500) == 0) fireOilSlick();
+        if (MathUtils.random(1500) == 0) fireOilSlick();
     }
 
     protected Vector2 getSize(){ return new Vector2(3,2); }
@@ -151,6 +151,6 @@ public class Car extends Actor {
 
         float rangeToTarget = body.getPosition().cpy().dst(target);
 
-        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * rangeToTarget / OilBomb.PRJ_SPEED * 1.75f)));
+        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * rangeToTarget / OilBomb.PRJ_SPEED * 1.75f).add(MathUtils.random(-10, 10), MathUtils.random(-10, 10))));
     }
 }
