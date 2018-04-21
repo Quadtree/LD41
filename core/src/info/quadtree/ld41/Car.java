@@ -142,9 +142,17 @@ public class Car extends Actor {
             body.applyAngularImpulse(MathUtils.random(-200, 200), true);
 
             ((OilSlick) a).oilLeft -= 50;
+
+            for (int i=0;i<3;++i){
+                emitSmoke();
+            }
         }
 
         collidingWith.add(a);
+    }
+
+    private void emitSmoke() {
+        LD41.s.gs.actors.add(new Spark(body.getPosition().cpy().add(MathUtils.random(-2, 2), MathUtils.random(-2, 2)), 20, LD41.s.smoke, true, 0.03f));
     }
 
     @Override
@@ -195,7 +203,11 @@ public class Car extends Actor {
     @Override
     public void destroyed() {
         for (int i=0;i<20;++i){
-            LD41.s.gs.actors.add(new Spark(body.getPosition().cpy().add(MathUtils.random(-2, 2), MathUtils.random(-2, 2)), 20, LD41.s.smoke, true, 0.03f));
+            emitSmoke();
+        }
+
+        for (int i=0;i<8;++i){
+            LD41.s.gs.actors.add(new CollidableSpark(body.getPosition().cpy().add(MathUtils.random(-2, 2), MathUtils.random(-2, 2)), 150, LD41.s.fragment));
         }
 
         super.destroyed();
