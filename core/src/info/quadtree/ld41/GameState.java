@@ -28,6 +28,8 @@ public class GameState {
     }
 
     public void init(){
+        actors.add(new Wall(new Vector2(60, 0), 90));
+
         for (int i=0;i<20;++i){
             for (int j=0;j<5;++j){
                 pcCar = new Car(new Vector2((i - 5) * 4, j * 4));
