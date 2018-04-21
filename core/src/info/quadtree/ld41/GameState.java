@@ -44,6 +44,8 @@ public class GameState {
             }
         }
 
+        pcCar.hasAi = false;
+
         camPos = pcCar.body.getPosition().cpy();
     }
 
@@ -82,8 +84,8 @@ public class GameState {
 
         LD41.s.batch.end();
 
-        Box2DDebugRenderer rnd = new Box2DDebugRenderer();
-        rnd.render(world, cam.combined);
+        //Box2DDebugRenderer rnd = new Box2DDebugRenderer();
+        //rnd.render(world, cam.combined);
     }
 
     public void update(){

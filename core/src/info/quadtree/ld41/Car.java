@@ -8,7 +8,13 @@ public class Car extends Actor {
     public float acceleration;
     public float actualSteering = 0;
 
+    public boolean hasAi = true;
+
     public float traction = 1;
+
+    public float stuckTime = 0;
+
+    public float turnIn = MathUtils.random();
 
     public Car(Vector2 startPos) {
         super(startPos);
@@ -17,6 +23,8 @@ public class Car extends Actor {
     @Override
     public void update() {
         super.update();
+
+        if (hasAi) runAi();
 
         traction = MathUtils.clamp(traction + 0.02f, 0, 1);
 
@@ -56,6 +64,32 @@ public class Car extends Actor {
 
         // drag
         body.applyLinearImpulse(body.getLinearVelocity().cpy().scl(-0.1f), body.getWorldCenter(), true);
+    }
+
+    private void runAi(){
+        Vector2 trgDest = new Vector2(MathUtils.clamp(body.getPosition().x * turnIn - body.getPosition().y * 0.25f, 0, 1000), body.getPosition().y + 30);
+
+        float leftDst = new Vector2(1, 0).rotateRad(body.getAngle() + 0.02f).add(body.getPosition()).dst2(trgDest);
+        float rightDst = new Vector2(1, 0).rotateRad(body.getAngle() - 0.02f).add(body.getPosition()).dst2(trgDest);
+
+        if (leftDst < rightDst){
+            steering = 1;
+        } else {
+            steering = -1;
+        }
+
+        if (body.getLinearVelocity().len() < 2f){
+            stuckTime += 0.016f;
+        } else {
+            stuckTime -= 0.1f;
+        }
+
+        //Vector2 delta = trgDest.cpy().sub(body.getPosition());
+        if (stuckTime < 1.5f) {
+            acceleration = 1;
+        } else {
+            acceleration = -1;
+        }
     }
 
     protected Vector2 getSize(){ return new Vector2(3,2); }
