@@ -49,7 +49,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 		batch.setProjectionMatrix(origProj.cpy());
 		batch.begin();
-		defaultFont.draw(batch, String.format("FPS: %d", Gdx.graphics.getFramesPerSecond()), 40, 40);
+		defaultFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 40, 40);
 		batch.end();
 
 
