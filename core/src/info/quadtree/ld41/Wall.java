@@ -35,7 +35,7 @@ public class Wall extends Actor {
         Vector2 cp1 = new Vector2();
         Vector2 add = new Vector2();
         for (int i=0;i<1500/segLength;++i){
-            cp.x = (i - 1500/segLength/2) * segLength;
+            cp.x = (i - 1500/segLength/2) * segLength + segLength / 2;
             cp.y = 0.5f;
 
             cp.rotateRad(body.getAngle());

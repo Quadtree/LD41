@@ -34,8 +34,8 @@ public class GameState implements ContactListener {
         actors.add(new Wall(new Vector2(47.3f, 0), MathUtils.PI / 2 + 0.06f + MathUtils.PI));
         actors.add(new Wall(new Vector2(-46.3f, 0), MathUtils.PI / 2 - 0.06f));
 
-        actors.add(new Wall(new Vector2(2.5f, 1498), MathUtils.PI / 2 + MathUtils.PI));
-        actors.add(new Wall(new Vector2(-1.5f, 1498), MathUtils.PI / 2));
+        actors.add(new Wall(new Vector2(2.35f, 1498), MathUtils.PI / 2 + MathUtils.PI));
+        actors.add(new Wall(new Vector2(-1.35f, 1498), MathUtils.PI / 2));
 
         int n = 0;
 
