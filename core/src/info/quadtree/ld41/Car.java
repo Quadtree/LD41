@@ -34,7 +34,7 @@ public class Car extends Actor {
         if (hasAi) runAi();
 
         if (slideTime < 0.1f) {
-            Vector2 accelVector = new Vector2(acceleration * 2.f, 0);
+            Vector2 accelVector = new Vector2(acceleration * 3.f, 0);
             accelVector.rotateRad(body.getAngle());
 
             body.applyLinearImpulse(accelVector, body.getWorldCenter(), true);
@@ -65,15 +65,19 @@ public class Car extends Actor {
 
             body.applyLinearImpulse(ssf, body.getWorldCenter(), true);
 
-            float drag = 0.1f;
 
-            for (Actor a : collidingWith){
-                if (a instanceof Car) drag += 0.1f;
-            }
-
-            // drag
-            body.applyLinearImpulse(body.getLinearVelocity().cpy().scl(-drag), body.getWorldCenter(), true);
         }
+
+        float drag = 0.1f;
+
+        for (Actor a : collidingWith){
+            if (a instanceof Car) drag += 0.1f;
+        }
+
+        if (slideTime > 0.1f) drag += 0.25f;
+
+        // drag
+        body.applyLinearImpulse(body.getLinearVelocity().cpy().scl(-drag), body.getWorldCenter(), true);
 
         slideTime = Math.max(slideTime - 0.016f, 0);
     }
@@ -141,6 +145,6 @@ public class Car extends Actor {
 
         float rangeToTarget = body.getPosition().cpy().dst(target);
 
-        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * rangeToTarget / OilBomb.PRJ_SPEED)));
+        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * rangeToTarget / OilBomb.PRJ_SPEED * 1.75f)));
     }
 }
