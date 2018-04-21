@@ -23,6 +23,8 @@ public class Car extends Actor {
 
     public int oilSlickCharge = 0;
 
+    boolean isAlive = true;
+
     Set<Actor> collidingWith = new HashSet<Actor>();
 
     public Car(Vector2 startPos) {
@@ -154,5 +156,10 @@ public class Car extends Actor {
         float rangeToTarget = body.getPosition().cpy().dst(target);
 
         LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * rangeToTarget / OilBomb.PRJ_SPEED * 1.75f).add(MathUtils.random(-10, 10), MathUtils.random(-10, 10))));
+    }
+
+    @Override
+    public boolean keep() {
+        return isAlive;
     }
 }

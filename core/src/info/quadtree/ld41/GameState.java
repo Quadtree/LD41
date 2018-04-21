@@ -46,6 +46,8 @@ public class GameState implements ContactListener {
         pcCar.hasAi = false;
 
         camPos = pcCar.body.getPosition().cpy();
+
+        actors.add(new WallOfDeath(new Vector2(0, -100)));
     }
 
     public void render(){
@@ -61,10 +63,12 @@ public class GameState implements ContactListener {
         cam.setToOrtho(false);
         cam.zoom = 3.f / 32.f;
 
-        Vector2 camTrg = pcCar.body.getPosition().cpy().add(pcCar.body.getLinearVelocity().cpy().scl(1));
+        if (pcCar != null) {
+            Vector2 camTrg = pcCar.body.getPosition().cpy().add(pcCar.body.getLinearVelocity().cpy().scl(1));
 
-        camPos.x = (camPos.x * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.x);
-        camPos.y = (camPos.y * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.y);
+            camPos.x = (camPos.x * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.x);
+            camPos.y = (camPos.y * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.y);
+        }
         cam.position.x = camPos.x;
         cam.position.y = camPos.y;
         //cam.position.x = pcCar.body.getPosition().x;
@@ -100,6 +104,7 @@ public class GameState implements ContactListener {
                 actors.get(i).update();
             else {
                 actors.get(i).destroyed();
+                if (actors.get(i) == pcCar) pcCar = null;
                 actors.remove(i--);
             }
         }
