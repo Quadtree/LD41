@@ -24,6 +24,10 @@ public class OilBomb extends Actor {
         body.setTransform(body.getPosition(), angle * MathUtils.degreesToRadians);
     }
 
+    public static float calcFlightTime(float range){
+        return range / PRJ_SPEED;
+    }
+
     @Override
     public void update() {
         super.update();

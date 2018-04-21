@@ -173,7 +173,7 @@ public class Car extends Actor {
 
         float inaccuracy = rangeToTarget * 0.1f;
 
-        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * rangeToTarget / OilBomb.PRJ_SPEED * 1.75f).add(MathUtils.random(-inaccuracy, inaccuracy), MathUtils.random(-inaccuracy, inaccuracy))));
+        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * OilBomb.calcFlightTime(rangeToTarget) * 1.75f).add(MathUtils.random(-inaccuracy, inaccuracy), MathUtils.random(-inaccuracy, inaccuracy))));
     }
 
     @Override
