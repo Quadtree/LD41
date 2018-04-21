@@ -6,7 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameState implements ContactListener {
     List<Actor> actors = new ArrayList<Actor>();
@@ -142,5 +144,15 @@ public class GameState implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
+    }
+
+    public int getPlayerPosition(){
+        List<Actor> list = actors.stream().filter(it -> it instanceof Car).sorted(Comparator.comparingDouble(a -> -a.body.getPosition().y)).collect(Collectors.toList());
+
+        return list.indexOf(pcCar) + 1;
+    }
+
+    public int getCarsLeft(){
+        return (int)actors.stream().filter(it -> it instanceof Car).count();
     }
 }
