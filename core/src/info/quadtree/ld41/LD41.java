@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Objects;
+
 public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public SpriteBatch batch;
 	public Texture img;
@@ -71,7 +73,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		gs = new GameState();
 		gs.init();
 
-		defaultFont = new BitmapFont();
+		defaultFont = new BitmapFont(Gdx.files.internal("aldrich_24.fnt"));
 
 		Gdx.input.setInputProcessor(this);
 	}
@@ -86,7 +88,12 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 		batch.setProjectionMatrix(origProj.cpy());
 		batch.begin();
-		defaultFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond() + " Position: " + gs.getPlayerPosition() + "/" + gs.getCarsLeft() + " Speed: " + (int)(gs.pcCar != null ? gs.pcCar.body.getLinearVelocity().len() : 0), 40, 40);
+		if (CHEATS) defaultFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 40, 40);
+
+		//defaultFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond() + " Position: " + gs.getPlayerPosition() + "/" + gs.getCarsLeft() + " Speed: " + (int)(gs.pcCar != null ? gs.pcCar.body.getLinearVelocity().len() : 0), 40, 40);
+		defaultFont.draw(batch, Objects.toString((int)(gs.pcCar != null ? gs.pcCar.body.getLinearVelocity().len() : 0)), Gdx.graphics.getWidth() - 40, Gdx.graphics.getHeight() - 5);
+		defaultFont.draw(batch, gs.getPlayerPosition() + "/" + gs.getCarsLeft(), 5, Gdx.graphics.getHeight() - 5);
+
 		batch.end();
 
 

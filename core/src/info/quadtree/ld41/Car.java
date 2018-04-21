@@ -104,7 +104,7 @@ public class Car extends Actor {
 
         if (hitOilSlick){
             for (int i=0;i<3;++i){
-                emitSmoke();
+                emitSmoke(100, Color.WHITE);
             }
             hitOilSlick = false;
         }
@@ -158,8 +158,8 @@ public class Car extends Actor {
 
     boolean hitOilSlick = false;
 
-    private void emitSmoke() {
-        LD41.s.gs.actors.add(new Spark(body.getPosition().cpy().add(MathUtils.random(-2, 2), MathUtils.random(-2, 2)), 20, LD41.s.smoke, true, 0.03f, 120.f));
+    private void emitSmoke(int life, Color color) {
+        LD41.s.gs.actors.add(new Spark(body.getPosition().cpy().add(MathUtils.random(-2, 2), MathUtils.random(-2, 2)), 20, LD41.s.smoke, true, 0.03f, 120.f, life, color));
     }
 
     @Override
@@ -209,8 +209,11 @@ public class Car extends Actor {
 
     @Override
     public void destroyed() {
+        for (int i=0;i<2;++i){
+            emitSmoke(30, Color.ORANGE);
+        }
         for (int i=0;i<20;++i){
-            emitSmoke();
+            emitSmoke(120, Color.WHITE);
         }
 
         for (int i=0;i<8;++i){

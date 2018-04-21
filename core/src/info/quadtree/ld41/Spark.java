@@ -10,11 +10,13 @@ public class Spark extends Actor {
     boolean expands;
     float drag;
 
-    float fadeTime = 120f;
+    float fadeTime;
 
     int life = 120;
 
-    public Spark(Vector2 startPos, float maxSpeed, Sprite sprite, boolean expands, float drag, float fadeTime) {
+    Color color;
+
+    public Spark(Vector2 startPos, float maxSpeed, Sprite sprite, boolean expands, float drag, float fadeTime, int life, Color color) {
         super(startPos);
 
         this.sprite = sprite;
@@ -26,7 +28,9 @@ public class Spark extends Actor {
         body.setAngularVelocity(MathUtils.random(-2, 2));
         this.expands = expands;
         this.drag = drag;
-        this.fadeTime = fadeTime;
+        this.fadeTime = Math.min(fadeTime, life);
+        this.color = color;
+        this.life = life;
     }
 
     @Override
@@ -40,7 +44,7 @@ public class Spark extends Actor {
 
     @Override
     public void render() {
-        doRender(sprite, new Color(1,1,1,MathUtils.clamp(life / fadeTime, 0, 1)));
+        doRender(sprite, new Color(color.r,color.g,color.b,MathUtils.clamp(life / fadeTime, 0, 1)));
     }
 
     @Override
