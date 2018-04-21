@@ -1,6 +1,7 @@
 package info.quadtree.ld41;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -15,7 +16,7 @@ public class Actor {
         bd.type = getBodyType();
         bd.position.x = startPos.x;
         bd.position.y = startPos.y;
-        bd.angle = 90;
+        bd.angle = MathUtils.PI / 2;
 
         body = LD41.s.gs.world.createBody(bd);
 
@@ -32,7 +33,7 @@ public class Actor {
     public void render(){
         // Texture texture, float x, float y, float originX, float originY, float width, float height, float scaleX,
         //		float scaleY, float rotation, int srcX, int srcY, int srcWidth, int srcHeight, boolean flipX, boolean flipY
-        LD41.s.batch.draw(getTextureRegion(), body.getPosition().x - 0.5f, body.getPosition().y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, getSize().x, getSize().y, body.getAngle());
+        LD41.s.batch.draw(getTextureRegion(), body.getPosition().x - 0.5f, body.getPosition().y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, getSize().x, getSize().y, MathUtils.radiansToDegrees * body.getAngle());
 
     }
     public boolean keep(){ return true; }

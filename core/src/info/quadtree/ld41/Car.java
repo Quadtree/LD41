@@ -21,7 +21,7 @@ public class Car extends Actor {
         traction = MathUtils.clamp(traction + 0.02f, 0, 1);
 
         Vector2 accelVector = new Vector2(acceleration * 2.f, 0);
-        accelVector.rotate(body.getAngle());
+        accelVector.rotateRad(body.getAngle());
 
         body.applyLinearImpulse(accelVector, body.getWorldCenter(), true);
 
@@ -29,7 +29,7 @@ public class Car extends Actor {
 
         actualSteering = actualSteering * 0.9f + steering * 0.1f;
 
-        float desiredTurnSpeed = actualSteering * 100f * MathUtils.clamp(body.getLinearVelocity().len() / 4f, 0, 1);
+        float desiredTurnSpeed = actualSteering * 100f / 180f * MathUtils.PI * MathUtils.clamp(body.getLinearVelocity().len() / 4f, 0, 1);
         float turnDelta = desiredTurnSpeed - body.getAngularVelocity();
 
         body.applyAngularImpulse(turnDelta, true);
@@ -42,10 +42,10 @@ public class Car extends Actor {
 
         // stop slides
         Vector2 velVector = body.getLinearVelocity().cpy();
-        velVector.rotate(-body.getAngle());
+        velVector.rotateRad(-body.getAngle());
 
         Vector2 stopSlideVector = new Vector2(0, -1);
-        stopSlideVector.rotate(body.getAngle());
+        stopSlideVector.rotateRad(body.getAngle());
 
         Vector2 ssf = stopSlideVector.scl(velVector.y);
 

@@ -29,7 +29,7 @@ public class GameState {
     }
 
     public void init(){
-        actors.add(new Wall(new Vector2(60, 0), 90));
+        actors.add(new Wall(new Vector2(60, 0), MathUtils.PI / 2));
 
         for (int i=0;i<20;++i){
             for (int j=0;j<5;++j){
