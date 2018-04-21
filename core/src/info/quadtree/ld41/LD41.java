@@ -25,13 +25,14 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public BitmapFont defaultFont;
 
 	public static final boolean CHEATS = true;
-	public static final boolean DEBUG_PHYSICS = true;
+	public static final boolean DEBUG_PHYSICS = false;
 
 	public Sprite carWheels;
 	public Sprite carBody;
 	public Sprite carCanopy;
 	public Sprite solid;
 	public Sprite wallOfDeath;
+	public Sprite road;
 
 	public TextureAtlas atlas;
 
@@ -48,6 +49,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		carCanopy = atlas.createSprite("car1_canopy");
 		solid = atlas.createSprite("solid");
 		wallOfDeath = atlas.createSprite("wall_of_death");
+		road = atlas.createSprite("road");
 
 		batch = new SpriteBatch();
 		origProj = batch.getProjectionMatrix().cpy();

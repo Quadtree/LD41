@@ -1,6 +1,6 @@
 
 main.png
-size: 128,64
+size: 256,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -13,16 +13,23 @@ car1_body
   index: -1
 car1_canopy
   rotate: false
-  xy: 70, 36
+  xy: 36, 36
   size: 32, 24
   orig: 32, 24
   offset: 0, 0
   index: -1
 car1_wheels
   rotate: false
-  xy: 36, 2
+  xy: 132, 132
   size: 32, 24
   orig: 32, 24
+  offset: 0, 0
+  index: -1
+road
+  rotate: false
+  xy: 2, 62
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
 solid
@@ -34,7 +41,7 @@ solid
   index: -1
 wall_of_death
   rotate: false
-  xy: 36, 28
+  xy: 132, 158
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

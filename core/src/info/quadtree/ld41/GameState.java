@@ -87,6 +87,15 @@ public class GameState implements ContactListener {
         LD41.s.batch.setProjectionMatrix(cam.combined);
         LD41.s.batch.begin();
 
+        float tileSize = 128 * cam.zoom;
+        float yBase = ((int)((camPos.y - 10 * tileSize) / tileSize)) * tileSize;
+
+        for (int x=-20;x<20;x++){
+            for (int y=-20;y<20;++y){
+                LD41.s.batch.draw(LD41.s.road, x * tileSize, y * tileSize + yBase, tileSize * 1.001f, tileSize * 1.001f);
+            }
+        }
+
         for (int pass=0;pass<5;++pass) {
             for (int i = 0; i < actors.size(); ++i) {
                 if (actors.get(i).getRenderPass() == pass)
