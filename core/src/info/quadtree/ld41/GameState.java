@@ -67,14 +67,17 @@ public class GameState implements ContactListener {
         camPos = pcCar.body.getPosition().cpy();
 
         actors.add(new WallOfDeath(new Vector2(0, -200)));
+
+        ticksDone = System.currentTimeMillis();
     }
 
     public void render(){
+        int updates = 0;
 
-
-        if (ticksDone < System.currentTimeMillis()){
+        while (ticksDone < System.currentTimeMillis() && updates < 10){
             update();
             ticksDone += 16;
+            ++updates;
         }
 
         final float CAM_MOVE_SPEED = 0.02f;

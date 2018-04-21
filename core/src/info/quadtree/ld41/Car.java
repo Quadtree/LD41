@@ -213,7 +213,9 @@ public class Car extends Actor {
 
     @Override
     public void destroyed() {
-        LD41.s.explosionSounds.get(MathUtils.random(LD41.s.explosionSounds.size() - 1)).play();
+        if (body.getPosition().dst2(LD41.s.gs.camPos) < (60*60)) {
+            LD41.s.explosionSounds.get(MathUtils.random(LD41.s.explosionSounds.size() - 1)).play();
+        }
 
         for (int i=0;i<2;++i){
             emitSmoke(30, Color.ORANGE);
