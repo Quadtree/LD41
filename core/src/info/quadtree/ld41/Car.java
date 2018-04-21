@@ -123,7 +123,7 @@ public class Car extends Actor {
         super.collidedWith(a);
 
         if (a instanceof OilSlick && body.getLinearVelocity().len() > 12f){
-            slideTime = 5;
+            slideTime = 2;
             body.applyAngularImpulse(MathUtils.random(-200, 200), true);
 
             ((OilSlick) a).oilLeft -= 50;
@@ -145,7 +145,7 @@ public class Car extends Actor {
         float targetSpeed = 0;
 
         for (Actor a : LD41.s.gs.actors){
-            if (a instanceof Car){
+            if (a instanceof Car && a != this){
                 if (a.body.getPosition().y > target.y){
                     target = a.body.getPosition();
                     targetSpeed = a.body.getLinearVelocity().len();
@@ -155,7 +155,9 @@ public class Car extends Actor {
 
         float rangeToTarget = body.getPosition().cpy().dst(target);
 
-        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * rangeToTarget / OilBomb.PRJ_SPEED * 1.75f).add(MathUtils.random(-10, 10), MathUtils.random(-10, 10))));
+        float inaccuracy = rangeToTarget * 0.1f;
+
+        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * rangeToTarget / OilBomb.PRJ_SPEED * 1.75f).add(MathUtils.random(-inaccuracy, inaccuracy), MathUtils.random(-inaccuracy, inaccuracy))));
     }
 
     @Override

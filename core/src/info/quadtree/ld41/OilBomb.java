@@ -22,6 +22,10 @@ public class OilBomb extends Actor {
     public void update() {
         super.update();
 
+        hitSomething();
+    }
+
+    private void hitSomething() {
         if (body.getPosition().dst2(targetPos) < 2*2){
             hasGoneOff = true;
             LD41.s.gs.actors.add(new OilSlick(targetPos));
@@ -41,7 +45,12 @@ public class OilBomb extends Actor {
     @Override
     protected boolean hasFixture() {
         return false;
+    }
 
+    @Override
+    protected void collidedWith(Actor a) {
+        super.collidedWith(a);
 
+        if (a instanceof Wall) hitSomething();
     }
 }

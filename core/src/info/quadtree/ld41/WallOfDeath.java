@@ -13,7 +13,19 @@ public class WallOfDeath extends Actor {
     public void update() {
         super.update();
 
-        body.setTransform(body.getPosition().cpy().add(0, 0.2f), 0);
+        body.setTransform(body.getPosition().cpy().add(0, 0.1f), 0);
+
+        float maxCarY = -1000;
+
+        for (Actor a : LD41.s.gs.actors){
+            if (a instanceof Car){
+                maxCarY = Math.max(a.body.getPosition().y, maxCarY);
+            }
+        }
+
+        if (maxCarY - body.getPosition().y > 150){
+            body.setTransform(body.getPosition().cpy().add(0, 0.6f), 0);
+        }
     }
 
     @Override
