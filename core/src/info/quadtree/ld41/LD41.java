@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public class LD41 extends ApplicationAdapter {
 	public SpriteBatch batch;
@@ -21,6 +22,8 @@ public class LD41 extends ApplicationAdapter {
 		img = new Texture("badlogic.jpg");
 
 		gs = new GameState();
+
+		gs.actors.add(new Car(new Vector2(20, 20)));
 	}
 
 	@Override
@@ -28,7 +31,9 @@ public class LD41 extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		//batch.draw(img, 0, 0);
+
+		gs.render();
+
 		batch.end();
 	}
 	

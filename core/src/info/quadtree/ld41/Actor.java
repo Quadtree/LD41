@@ -10,9 +10,11 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 public class Actor {
     Body body;
 
-    public Actor(){
+    public Actor(Vector2 startPos){
         BodyDef bd = new BodyDef();
         bd.type = getBodyType();
+        bd.position.x = startPos.x;
+        bd.position.y = startPos.y;
 
         body = LD41.s.gs.world.createBody(bd);
 
