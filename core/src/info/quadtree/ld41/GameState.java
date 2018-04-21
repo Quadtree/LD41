@@ -3,6 +3,7 @@ package info.quadtree.ld41;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
@@ -70,7 +71,13 @@ public class GameState {
             if (actors.get(i).keep())
                 actors.get(i).render();
         }
+
+
+
         LD41.s.batch.end();
+
+        Box2DDebugRenderer rnd = new Box2DDebugRenderer();
+        rnd.render(world, cam.combined);
     }
 
     public void update(){
