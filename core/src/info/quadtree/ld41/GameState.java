@@ -12,12 +12,21 @@ public class GameState {
 
     World world;
 
+    Car pcCar;
+
     long ticksDone = 0;
 
     public OrthographicCamera cam = new OrthographicCamera();
 
     public GameState(){
         world = new World(new Vector2(0,0), true);
+
+
+    }
+
+    public void init(){
+        actors.add(new Car(new Vector2(20, 20)));
+        pcCar = (Car)actors.get(0);
     }
 
     public void render(){
@@ -51,5 +60,7 @@ public class GameState {
             else
                 actors.remove(i--);
         }
+
+        world.step(0.016f, 2, 2);
     }
 }
