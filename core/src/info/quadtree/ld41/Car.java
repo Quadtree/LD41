@@ -34,7 +34,11 @@ public class Car extends Actor {
 
     public Car(Vector2 startPos) {
         super(startPos);
+
+        color = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(0, 0.6f), 1);
     }
+
+
 
     @Override
     public void update() {

@@ -1,5 +1,6 @@
 package info.quadtree.ld41;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -46,6 +47,7 @@ public class GameState implements ContactListener {
         }
 
         pcCar.hasAi = false;
+        pcCar.color = new Color(0,0,1,1);
 
         camPos = pcCar.body.getPosition().cpy();
 
