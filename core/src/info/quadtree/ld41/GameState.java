@@ -59,7 +59,7 @@ public class GameState {
             final float TURN_SPEED = 0.02f;
 
             pcCar.acceleration = LD41.s.accel ? 1 : (LD41.s.brake ? -1 : 0);
-            pcCar.steering = MathUtils.clamp(pcCar.steering + (LD41.s.turnLeft ? TURN_SPEED : (LD41.s.turnRight ? -TURN_SPEED : 0)), -1, 1);
+            pcCar.steering = LD41.s.turnLeft ? 1 : (LD41.s.turnRight ? -1 : 0);
         }
 
         for (int i=0;i<actors.size();++i){
