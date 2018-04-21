@@ -13,7 +13,7 @@ public class OilBomb extends Actor {
     static final float PRJ_SPEED = 80;
 
     float x = -0.5f;
-    float xChangeRate;
+    float rtt;
 
     public OilBomb(Vector2 startPos, Vector2 targetPos) {
         super(startPos);
@@ -21,14 +21,14 @@ public class OilBomb extends Actor {
         this.targetPos = targetPos.cpy();
 
         Vector2 toTarget = targetPos.cpy().sub(startPos);
-        float rtt = toTarget.len();
+        rtt = toTarget.len();
         toTarget.nor();
         float angle = toTarget.angle();
 
         body.setLinearVelocity(toTarget.scl(PRJ_SPEED));
         body.setTransform(body.getPosition(), angle * MathUtils.degreesToRadians);
 
-        xChangeRate = rtt / PRJ_SPEED * 0.016f * 4;
+        //xChangeRate = rtt / PRJ_SPEED * 0.016f * 4;
     }
 
     public static float calcFlightTime(float range){
