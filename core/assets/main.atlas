@@ -4,6 +4,13 @@ size: 256,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+barrier1
+  rotate: false
+  xy: 166, 179
+  size: 43, 11
+  orig: 43, 11
+  offset: 0, 0
+  index: -1
 car1_body
   rotate: false
   xy: 2, 2
