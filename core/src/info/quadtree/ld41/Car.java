@@ -191,4 +191,13 @@ public class Car extends Actor {
         doRender(LD41.s.carBody, color);
         doRender(LD41.s.carCanopy, Color.WHITE);
     }
+
+    @Override
+    public void destroyed() {
+        for (int i=0;i<20;++i){
+            LD41.s.gs.actors.add(new Spark(body.getPosition().cpy().add(MathUtils.random(-2, 2), MathUtils.random(-2, 2)), 20, LD41.s.smoke, true, 0.03f));
+        }
+
+        super.destroyed();
+    }
 }

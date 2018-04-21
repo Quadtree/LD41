@@ -6,77 +6,98 @@ filter: Nearest,Nearest
 repeat: none
 barrier1
   rotate: false
-  xy: 211, 224
+  xy: 2, 2
   size: 43, 11
   orig: 43, 11
   offset: 0, 0
   index: -1
 car1_body
   rotate: false
-  xy: 177, 211
+  xy: 132, 130
   size: 32, 24
   orig: 32, 24
   offset: 0, 0
   index: -1
 car1_canopy
   rotate: false
-  xy: 2, 2
+  xy: 198, 196
   size: 32, 24
   orig: 32, 24
   offset: 0, 0
   index: -1
 car1_wheels
   rotate: false
-  xy: 81, 81
+  xy: 166, 130
   size: 32, 24
   orig: 32, 24
   offset: 0, 0
   index: -1
+fragment1
+  rotate: false
+  xy: 47, 42
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 grass1
   rotate: false
-  xy: 2, 62
+  xy: 2, 15
   size: 43, 43
   orig: 43, 43
   offset: 0, 0
   index: -1
 grass2
   rotate: false
-  xy: 132, 192
+  xy: 68, 81
   size: 43, 43
   orig: 43, 43
   offset: 0, 0
   index: -1
 oil_bomb
   rotate: false
-  xy: 132, 140
+  xy: 68, 63
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 oil_slick
   rotate: false
-  xy: 2, 28
+  xy: 132, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 road
   rotate: false
-  xy: 2, 107
+  xy: 2, 126
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
+smoke1
+  rotate: false
+  xy: 2, 60
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+smoke2
+  rotate: false
+  xy: 132, 190
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
 solid
   rotate: false
-  xy: 47, 73
+  xy: 198, 222
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 wall_of_death
   rotate: false
-  xy: 132, 158
+  xy: 166, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
