@@ -29,12 +29,14 @@ public class Car extends Actor {
 
         actualSteering = actualSteering * 0.9f + steering * 0.1f;
 
-        float desiredTurnSpeed = actualSteering * 100f;
+        float desiredTurnSpeed = actualSteering * 100f * MathUtils.clamp(body.getLinearVelocity().len() / 4f, 0, 1);
         float turnDelta = desiredTurnSpeed - body.getAngularVelocity();
 
         body.applyAngularImpulse(turnDelta, true);
         //traction -= turnDelta * 0.05f;
         //System.out.println(turnDelta + " " + desiredTurnSpeed + " " + body.getAngle());
+
+        //if (body.getLinearVelocity().len() > 0) System.out.println(body.getLinearVelocity().len());
 
 
 
@@ -55,4 +57,6 @@ public class Car extends Actor {
         // drag
         body.applyLinearImpulse(body.getLinearVelocity().cpy().scl(-0.1f), body.getWorldCenter(), true);
     }
+
+    protected Vector2 getSize(){ return new Vector2(3,2); }
 }

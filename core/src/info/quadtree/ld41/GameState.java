@@ -19,6 +19,8 @@ public class GameState {
 
     public OrthographicCamera cam = new OrthographicCamera();
 
+    Vector2 camPos = new Vector2();
+
     public GameState(){
         world = new World(new Vector2(0,0), true);
 
@@ -33,6 +35,7 @@ public class GameState {
             }
         }
 
+        camPos = pcCar.body.getPosition().cpy();
     }
 
     public void render(){
@@ -43,10 +46,19 @@ public class GameState {
             ticksDone += 16;
         }
 
+        final float CAM_MOVE_SPEED = 0.02f;
+
         cam.setToOrtho(false);
         cam.zoom = 3.f / 32.f;
-        cam.position.x = 20;
-        cam.position.y = 20;
+
+        Vector2 camTrg = pcCar.body.getPosition().cpy().add(pcCar.body.getLinearVelocity().cpy().scl(1));
+
+        camPos.x = (camPos.x * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.x);
+        camPos.y = (camPos.y * (1 - CAM_MOVE_SPEED)) + (CAM_MOVE_SPEED * camTrg.y);
+        cam.position.x = camPos.x;
+        cam.position.y = camPos.y;
+        //cam.position.x = pcCar.body.getPosition().x;
+        //cam.position.y = pcCar.body.getPosition().y;
         cam.update();
 
         LD41.s.batch.setProjectionMatrix(cam.combined);
