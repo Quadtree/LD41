@@ -32,15 +32,37 @@ public class Wall extends Actor {
         float segWidth = 1;
 
         Vector2 cp = new Vector2();
+        Vector2 cp1 = new Vector2();
+        Vector2 add = new Vector2();
         for (int i=0;i<1500/segLength;++i){
             cp.x = (i - 1500/segLength/2) * segLength;
             cp.y = 0.5f;
 
             cp.rotateRad(body.getAngle());
-
             cp.add(body.getPosition());
 
+            // draw the grass FIRST
+            cp1.set(cp);
+
+            add.y = segLength / 2;
+            add.x = 0;
+            add.rotateRad(body.getAngle());
+            cp1.add(add);
+
+            for (int j=0;j<24;++j){
+                LD41.s.batch.draw(LD41.s.grass, cp1.x - 0.5f, cp1.y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, segLength, segLength, MathUtils.radiansToDegrees * body.getAngle());
+
+                add.y = segLength;
+                add.x = 0;
+                add.rotateRad(body.getAngle());
+                cp1.add(add);
+            }
+
             LD41.s.batch.draw(LD41.s.barrier, cp.x - 0.5f, cp.y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, segLength, segWidth, MathUtils.radiansToDegrees * body.getAngle());
+
+
+
+
         }
     }
 }
