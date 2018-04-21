@@ -137,7 +137,7 @@ public class Car extends Actor {
     protected void collidedWith(Actor a) {
         super.collidedWith(a);
 
-        if (a instanceof OilSlick && body.getLinearVelocity().len() > 12f){
+        if (a instanceof OilSlick && body.getLinearVelocity().len() > 18f){
             slideTime = 2;
             body.applyAngularImpulse(MathUtils.random(-200, 200), true);
 

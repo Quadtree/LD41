@@ -10,7 +10,7 @@ public class OilBomb extends Actor {
 
     boolean hasGoneOff = false;
 
-    static final float PRJ_SPEED = 80;
+    static final float PRJ_SPEED = 60;
 
     float x = -0.5f;
     float rtt;
@@ -41,7 +41,8 @@ public class OilBomb extends Actor {
 
         hitSomething();
 
-        x += xChangeRate;
+        float rrtt = body.getPosition().cpy().dst(targetPos) - 2;
+        x = 0.5f - (rrtt / rtt);
 
         if (x > 0.6f) System.out.println("x=" + x);
     }
@@ -51,12 +52,10 @@ public class OilBomb extends Actor {
     }
 
     private void hitSomething() {
-        //if (body.getPosition().dst2(targetPos) < 2*2){
-        if (x >= 0.5f) {
+        if (body.getPosition().dst2(targetPos) < 2*2){
             hasGoneOff = true;
             LD41.s.gs.actors.add(new OilSlick(targetPos));
         }
-        //}
     }
 
     @Override
@@ -85,13 +84,18 @@ public class OilBomb extends Actor {
     }
 
     @Override
+    protected float renderSizeMul() {
+        return getAltitude() * 3 + 1;
+    }
+
+    @Override
     public void render() {
 
 
 
-        float opac = MathUtils.lerp(1, 0.15f, MathUtils.clamp(getAltitude() * 2, 0, 1));
+        float opac = MathUtils.lerp(1, 0.05f, MathUtils.clamp(getAltitude() * 1.25f, 0, 1));
 
-        System.out.println(x + " - " + opac);
+        //System.out.println(x + " - " + opac);
 
         //System.err.println(opac);
 

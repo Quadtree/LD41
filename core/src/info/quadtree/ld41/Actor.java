@@ -62,7 +62,7 @@ public class Actor {
         region.setRotation(MathUtils.radiansToDegrees * body.getAngle());
         region.setOrigin(region.getWidth() / 2, region.getHeight() / 2);
         //region.setCenter();
-        region.setBounds(body.getPosition().x - region.getWidth() / 2, body.getPosition().y - region.getHeight() / 2, getSize().x, getSize().y);
+        region.setBounds(body.getPosition().x - region.getWidth() / 2, body.getPosition().y - region.getHeight() / 2, getSize().x * renderSizeMul(), getSize().y * renderSizeMul());
         //region.setSize();
 
         //region.setRotation(MathUtils.radiansToDegrees * body.getAngle());

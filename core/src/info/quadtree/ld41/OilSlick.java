@@ -1,6 +1,8 @@
 package info.quadtree.ld41;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -51,5 +53,10 @@ public class OilSlick extends Actor {
     @Override
     protected float renderSizeMul() {
         return 1.3f;
+    }
+
+    @Override
+    public void render() {
+        doRender(LD41.s.oilSlick, new Color(1,1,1, MathUtils.clamp(oilLeft / 45.f, 0.f, 1.f)));
     }
 }

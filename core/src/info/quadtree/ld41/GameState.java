@@ -44,7 +44,7 @@ public class GameState implements ContactListener {
                 Actor tmp = new Car(new Vector2((i - 10) * 4 + 2, j * 4));
                 actors.add(tmp);
 
-                ((Car)tmp).hasAi = false;
+                //((Car)tmp).hasAi = false;
 
                 if (MathUtils.random(n++) == 0) pcCar = (Car)tmp;
             }
