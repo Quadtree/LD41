@@ -25,7 +25,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public BitmapFont defaultFont;
 
 	public static final boolean CHEATS = true;
-	public static final boolean DEBUG_PHYSICS = false;
+	public static final boolean DEBUG_PHYSICS = true;
 
 	public Sprite carWheels;
 	public Sprite carBody;

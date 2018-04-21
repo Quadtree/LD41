@@ -1,5 +1,6 @@
 package info.quadtree.ld41;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -29,18 +30,13 @@ public class WallOfDeath extends Actor {
     }
 
     @Override
-    protected Sprite getTextureRegion() {
-        return super.getTextureRegion();
-    }
-
-    @Override
     protected BodyDef.BodyType getBodyType() {
         return BodyDef.BodyType.KinematicBody;
     }
 
     @Override
     protected Vector2 getSize() {
-        return new Vector2(200, 200);
+        return new Vector2(3, 3);
     }
 
     @Override

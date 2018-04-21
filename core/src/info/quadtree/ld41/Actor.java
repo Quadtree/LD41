@@ -1,6 +1,7 @@
 package info.quadtree.ld41;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -41,8 +42,12 @@ public class Actor {
     public void render(){
         // Texture texture, float x, float y, float originX, float originY, float width, float height, float scaleX,
         //		float scaleY, float rotation, int srcX, int srcY, int srcWidth, int srcHeight, boolean flipX, boolean flipY
-        doRender(getTextureRegion(), Color.WHITE);
+        doRender(getTextureRegion());
 
+    }
+
+    protected void doRender(TextureRegion region) {
+        LD41.s.batch.draw(region, body.getPosition().x - 0.5f, body.getPosition().y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, getSize().x, getSize().y, MathUtils.radiansToDegrees * body.getAngle());
     }
 
     protected void doRender(Sprite region, Color color) {
@@ -66,7 +71,7 @@ public class Actor {
 
     public boolean keep(){ return true; }
 
-    protected Sprite getTextureRegion(){ return LD41.s.solid; }
+    protected TextureRegion getTextureRegion(){ return new TextureRegion(LD41.s.img); }
     protected BodyDef.BodyType getBodyType(){ return BodyDef.BodyType.DynamicBody; }
     protected Vector2 getSize(){ return new Vector2(3,3); }
     protected boolean isSensor(){ return false; }
