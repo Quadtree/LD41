@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,6 +15,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LD41 extends ApplicationAdapter implements InputProcessor {
@@ -43,6 +46,8 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public Sprite fragment;
 	public Sprite smoke;
 
+	public List<Sound> explosionSounds = new ArrayList<>();
+
 	public TextureAtlas atlas;
 
 	boolean showingTitleScreen = true;
@@ -67,6 +72,10 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		oilBomb = atlas.createSprite("oil_bomb");
 		fragment = atlas.createSprite("fragment1");
 		smoke = atlas.createSprite("smoke2");
+
+		for (int i=0;i<4;++i){
+			explosionSounds.add(Gdx.audio.newSound(Gdx.files.internal("exp" + i + ".wav")));
+		}
 
 
 		batch = new SpriteBatch();
