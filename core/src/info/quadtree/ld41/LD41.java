@@ -34,9 +34,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public void render () {
-		if (gs.pcCar != null){
-			gs.pcCar.acceleration = accel ? 1 : (brake ? -1 : 0);
-		}
+
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -60,6 +58,18 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			accel = true;
 			return true;
 		}
+		if (keycode == Input.Keys.S){
+			brake = true;
+			return true;
+		}
+		if (keycode == Input.Keys.A){
+			turnLeft = true;
+			return true;
+		}
+		if (keycode == Input.Keys.D){
+			turnRight = true;
+			return true;
+		}
 
 		return false;
 	}
@@ -68,6 +78,18 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public boolean keyUp(int keycode) {
 		if (keycode == Input.Keys.W){
 			accel = false;
+			return true;
+		}
+		if (keycode == Input.Keys.S){
+			brake = false;
+			return true;
+		}
+		if (keycode == Input.Keys.A){
+			turnLeft = false;
+			return true;
+		}
+		if (keycode == Input.Keys.D){
+			turnRight = false;
 			return true;
 		}
 

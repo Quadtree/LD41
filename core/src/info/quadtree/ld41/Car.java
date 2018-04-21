@@ -18,5 +18,7 @@ public class Car extends Actor {
         accelVector.rotateRad(body.getAngle());
 
         body.applyLinearImpulse(accelVector, body.getWorldCenter(), true);
+
+        body.applyAngularImpulse(steering, true);
     }
 }

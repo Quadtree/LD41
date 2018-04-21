@@ -1,6 +1,7 @@
 package info.quadtree.ld41;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -54,6 +55,13 @@ public class GameState {
     }
 
     public void update(){
+        if (pcCar != null){
+            final float TURN_SPEED = 0.02f;
+
+            pcCar.acceleration = LD41.s.accel ? 1 : (LD41.s.brake ? -1 : 0);
+            pcCar.steering = MathUtils.clamp(pcCar.steering + (LD41.s.turnLeft ? TURN_SPEED : (LD41.s.turnRight ? -TURN_SPEED : 0)), -1, 1);
+        }
+
         for (int i=0;i<actors.size();++i){
             if (actors.get(i).keep())
                 actors.get(i).update();
