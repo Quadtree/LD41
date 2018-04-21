@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
 public class OilSlick extends Actor {
+    public int oilLeft = 300;
+
     public OilSlick(Vector2 startPos) {
         super(startPos);
     }
@@ -27,5 +29,17 @@ public class OilSlick extends Actor {
     @Override
     protected boolean isSensor() {
         return true;
+    }
+
+    @Override
+    public void update() {
+        super.update();
+
+        --oilLeft;
+    }
+
+    @Override
+    public boolean keep() {
+        return oilLeft > 0;
     }
 }

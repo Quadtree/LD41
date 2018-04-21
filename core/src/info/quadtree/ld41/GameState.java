@@ -98,8 +98,10 @@ public class GameState implements ContactListener {
         for (int i=0;i<actors.size();++i){
             if (actors.get(i).keep())
                 actors.get(i).update();
-            else
+            else {
+                actors.get(i).destroyed();
                 actors.remove(i--);
+            }
         }
 
         world.step(0.016f, 2, 2);

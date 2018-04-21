@@ -50,4 +50,9 @@ public class Actor {
     protected void collidedWith(Actor a){}
     protected void stopCollideWith(Actor a){}
     protected boolean hasFixture(){ return true; }
+
+    public void destroyed(){
+        LD41.s.gs.world.destroyBody(body);
+        body = null;
+    }
 }
