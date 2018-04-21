@@ -8,12 +8,14 @@ public class OilBomb extends Actor {
 
     boolean hasGoneOff = false;
 
+    static final float PRJ_SPEED = 80;
+
     public OilBomb(Vector2 startPos, Vector2 targetPos) {
         super(startPos);
 
         this.targetPos = targetPos.cpy();
 
-        body.setLinearVelocity(targetPos.cpy().sub(startPos).nor().scl(40));
+        body.setLinearVelocity(targetPos.cpy().sub(startPos).nor().scl(PRJ_SPEED));
     }
 
     @Override

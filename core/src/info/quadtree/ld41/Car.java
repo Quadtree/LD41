@@ -128,15 +128,19 @@ public class Car extends Actor {
 
     public void fireOilSlick(){
         Vector2 target = new Vector2(0, -10000);
+        float targetSpeed = 0;
 
         for (Actor a : LD41.s.gs.actors){
             if (a instanceof Car){
                 if (a.body.getPosition().y > target.y){
                     target = a.body.getPosition();
+                    targetSpeed = a.body.getLinearVelocity().len();
                 }
             }
         }
 
-        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, 25)));
+        float rangeToTarget = body.getPosition().cpy().dst(target);
+
+        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * rangeToTarget / OilBomb.PRJ_SPEED)));
     }
 }
