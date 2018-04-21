@@ -74,6 +74,9 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		gs = new GameState();
 		gs.init();
 
+		// TODO: Remove
+		gs.started = true;
+
 		defaultFont = new BitmapFont(Gdx.files.internal("aldrich_24.fnt"));
 		bigFont = new BitmapFont(Gdx.files.internal("aldrich_90.fnt"));
 
@@ -109,6 +112,10 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			defaultFont.draw(batch, gs.getPlayerPosition() + "/" + gs.getCarsLeft(), 5, Gdx.graphics.getHeight() - 5);
 		}
 
+		if (gs.msg1Phase < 0.99f) Util.drawTextCentered("Get ready!", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - (0.5f - gs.msg1Phase) * 800);
+		if (gs.msg2Phase < 0.99f) Util.drawTextCentered("Go!", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - (0.5f - gs.msg2Phase) * 800);
+
+
 		batch.end();
 
 
@@ -141,6 +148,12 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		}
 		if (keycode == Input.Keys.D){
 			turnRight = true;
+			return true;
+		}
+		if (keycode == Input.Keys.R){
+			gs = new GameState();
+			gs.init();
+			gs.started = true;
 			return true;
 		}
 

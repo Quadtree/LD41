@@ -24,11 +24,14 @@ public class GameState implements ContactListener {
 
     Vector2 camPos = new Vector2();
 
-    float startTime = 3;
+    float startTime = 1.5f;
     boolean started = false;
 
     boolean hasWon = false;
     boolean hasLost = false;
+
+    float msg1Phase = 0;
+    float msg2Phase = 0;
 
     public GameState(){
         world = new World(new Vector2(0,0), true);
@@ -148,6 +151,17 @@ public class GameState implements ContactListener {
         if (pcCar == null) hasLost = true;
 
         if (started) startTime -= 0.016f;
+
+        if (started){
+            if (startTime > 0.25f){
+                msg1Phase = Math.min(msg1Phase + 0.05f, 0.5f);
+            } else if (startTime > -0.25f) {
+                msg1Phase = Math.min(msg1Phase + 0.05f, 1.5f);
+                msg2Phase = Math.min(msg2Phase + 0.05f, 0.5f);
+            } else {
+                msg2Phase = Math.min(msg2Phase + 0.05f, 1.5f);
+            }
+        }
     }
 
     @Override
