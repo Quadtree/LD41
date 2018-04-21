@@ -21,6 +21,8 @@ public class Car extends Actor {
 
     public float slideTime = 0;
 
+    public int oilSlickCharge = 0;
+
     Set<Actor> collidingWith = new HashSet<Actor>();
 
     public Car(Vector2 startPos) {
@@ -32,6 +34,8 @@ public class Car extends Actor {
         super.update();
 
         if (hasAi) runAi();
+
+        ++oilSlickCharge;
 
         if (slideTime < 0.1f) {
             Vector2 accelVector = new Vector2(acceleration * 3.f, 0);
@@ -106,6 +110,8 @@ public class Car extends Actor {
         } else {
             acceleration = -1;
         }
+
+        if (MathUtils.random(500) == 0) fireOilSlick();
     }
 
     protected Vector2 getSize(){ return new Vector2(3,2); }
@@ -115,7 +121,6 @@ public class Car extends Actor {
         super.collidedWith(a);
 
         if (a instanceof OilSlick){
-            System.out.println("COL: " + a);
             slideTime = 5;
             body.applyAngularImpulse(MathUtils.random(-200, 200), true);
         }
@@ -131,6 +136,7 @@ public class Car extends Actor {
     }
 
     public void fireOilSlick(){
+        if (oilSlickCharge < 240) return;
         Vector2 target = new Vector2(0, -10000);
         float targetSpeed = 0;
 
