@@ -3,13 +3,12 @@ package info.quadtree.ld41;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameState {
+public class GameState implements ContactListener {
     List<Actor> actors = new ArrayList<Actor>();
 
     World world;
@@ -25,7 +24,7 @@ public class GameState {
     public GameState(){
         world = new World(new Vector2(0,0), true);
 
-
+        world.setContactListener(this);
     }
 
     public void init(){
@@ -104,5 +103,31 @@ public class GameState {
         }
 
         world.step(0.016f, 2, 2);
+    }
+
+    @Override
+    public void beginContact(Contact contact) {
+        Object oa = contact.getFixtureA().getBody().getUserData();
+        Object ob = contact.getFixtureB().getBody().getUserData();
+
+        if (oa instanceof Actor && ob instanceof Actor){
+            ((Actor) oa).collidedWith((Actor)ob);
+            ((Actor) ob).collidedWith((Actor)oa);
+        }
+    }
+
+    @Override
+    public void endContact(Contact contact) {
+
+    }
+
+    @Override
+    public void preSolve(Contact contact, Manifold oldManifold) {
+
+    }
+
+    @Override
+    public void postSolve(Contact contact, ContactImpulse impulse) {
+
     }
 }

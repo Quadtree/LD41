@@ -87,8 +87,16 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			return true;
 		}
 
-		if (keycode == Input.Keys.U) {
-			gs.pcCar.body.setTransform(gs.pcCar.body.getPosition().cpy().add(0, 200), gs.pcCar.body.getAngle());
+		if (keycode == Input.Keys.SPACE){
+			gs.pcCar.fireOilSlick();
+			return true;
+		}
+
+		if (CHEATS) {
+			if (keycode == Input.Keys.U) {
+				gs.pcCar.body.setTransform(gs.pcCar.body.getPosition().cpy().add(0, 200), gs.pcCar.body.getAngle());
+				return true;
+			}
 		}
 
 		return false;

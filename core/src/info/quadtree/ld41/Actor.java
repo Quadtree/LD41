@@ -19,14 +19,18 @@ public class Actor {
         bd.angle = MathUtils.PI / 2;
 
         body = LD41.s.gs.world.createBody(bd);
+        body.setUserData(this);
 
-        FixtureDef fd = new FixtureDef();
-        fd.density = 1;
-        PolygonShape ps = new PolygonShape();
-        ps.setAsBox(getSize().x * 0.5f, getSize().y * 0.5f);
-        fd.shape = ps;
+        if (hasFixture()) {
+            FixtureDef fd = new FixtureDef();
+            fd.density = 1;
+            PolygonShape ps = new PolygonShape();
+            ps.setAsBox(getSize().x * 0.5f, getSize().y * 0.5f);
+            fd.shape = ps;
+            fd.isSensor = isSensor();
 
-        body.createFixture(fd);
+            body.createFixture(fd);
+        }
     }
 
     public void update(){}
@@ -41,4 +45,8 @@ public class Actor {
     protected TextureRegion getTextureRegion(){ return new TextureRegion(LD41.s.img); }
     protected BodyDef.BodyType getBodyType(){ return BodyDef.BodyType.DynamicBody; }
     protected Vector2 getSize(){ return new Vector2(3,3); }
+    protected boolean isSensor(){ return false; }
+
+    protected void collidedWith(Actor a){}
+    protected boolean hasFixture(){ return true; }
 }

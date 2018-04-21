@@ -16,6 +16,8 @@ public class Car extends Actor {
 
     public float turnIn = MathUtils.random();
 
+    public float slideTime = 0;
+
     public Car(Vector2 startPos) {
         super(startPos);
     }
@@ -26,44 +28,44 @@ public class Car extends Actor {
 
         if (hasAi) runAi();
 
-        traction = MathUtils.clamp(traction + 0.02f, 0, 1);
+        if (slideTime < 0.1f) {
+            Vector2 accelVector = new Vector2(acceleration * 2.f, 0);
+            accelVector.rotateRad(body.getAngle());
 
-        Vector2 accelVector = new Vector2(acceleration * 2.f, 0);
-        accelVector.rotateRad(body.getAngle());
-
-        body.applyLinearImpulse(accelVector, body.getWorldCenter(), true);
-
+            body.applyLinearImpulse(accelVector, body.getWorldCenter(), true);
 
 
-        actualSteering = actualSteering * 0.9f + steering * 0.1f;
+            actualSteering = actualSteering * 0.9f + steering * 0.1f;
 
-        float desiredTurnSpeed = actualSteering * 100f / 180f * MathUtils.PI * MathUtils.clamp(body.getLinearVelocity().len() / 4f, 0, 1);
-        float turnDelta = desiredTurnSpeed - body.getAngularVelocity();
+            float desiredTurnSpeed = actualSteering * 100f / 180f * MathUtils.PI * MathUtils.clamp(body.getLinearVelocity().len() / 4f, 0, 1);
+            float turnDelta = desiredTurnSpeed - body.getAngularVelocity();
 
-        body.applyAngularImpulse(turnDelta, true);
-        //traction -= turnDelta * 0.05f;
-        //System.out.println(turnDelta + " " + desiredTurnSpeed + " " + body.getAngle());
+            body.applyAngularImpulse(turnDelta, true);
+            //traction -= turnDelta * 0.05f;
+            //System.out.println(turnDelta + " " + desiredTurnSpeed + " " + body.getAngle());
 
-        //if (body.getLinearVelocity().len() > 0) System.out.println(body.getLinearVelocity().len());
-
-
-
-        // stop slides
-        Vector2 velVector = body.getLinearVelocity().cpy();
-        velVector.rotateRad(-body.getAngle());
-
-        Vector2 stopSlideVector = new Vector2(0, -1);
-        stopSlideVector.rotateRad(body.getAngle());
-
-        Vector2 ssf = stopSlideVector.scl(velVector.y);
-
-        //System.out.println(String.format("SLIDE=%f, Stop slide force %s", velVector.y, ssf));
-
-        body.applyLinearImpulse(ssf, body.getWorldCenter(), true);
+            //if (body.getLinearVelocity().len() > 0) System.out.println(body.getLinearVelocity().len());
 
 
-        // drag
-        body.applyLinearImpulse(body.getLinearVelocity().cpy().scl(-0.1f), body.getWorldCenter(), true);
+            // stop slides
+            Vector2 velVector = body.getLinearVelocity().cpy();
+            velVector.rotateRad(-body.getAngle());
+
+            Vector2 stopSlideVector = new Vector2(0, -1);
+            stopSlideVector.rotateRad(body.getAngle());
+
+            Vector2 ssf = stopSlideVector.scl(velVector.y);
+
+            //System.out.println(String.format("SLIDE=%f, Stop slide force %s", velVector.y, ssf));
+
+            body.applyLinearImpulse(ssf, body.getWorldCenter(), true);
+
+
+            // drag
+            body.applyLinearImpulse(body.getLinearVelocity().cpy().scl(-0.1f), body.getWorldCenter(), true);
+        }
+
+        slideTime = Math.max(slideTime - 0.016f, 0);
     }
 
     private void runAi(){
@@ -93,4 +95,29 @@ public class Car extends Actor {
     }
 
     protected Vector2 getSize(){ return new Vector2(3,2); }
+
+    @Override
+    protected void collidedWith(Actor a) {
+        super.collidedWith(a);
+
+        if (a instanceof OilSlick){
+            System.out.println("COL: " + a);
+            slideTime = 5;
+            body.applyAngularImpulse(MathUtils.random(-200, 200), true);
+        }
+    }
+
+    public void fireOilSlick(){
+        Vector2 target = new Vector2(0, -10000);
+
+        for (Actor a : LD41.s.gs.actors){
+            if (a instanceof Car){
+                if (a.body.getPosition().y > target.y){
+                    target = a.body.getPosition();
+                }
+            }
+        }
+
+        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, 25)));
+    }
 }
