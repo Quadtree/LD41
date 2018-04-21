@@ -101,6 +101,13 @@ public class Car extends Actor {
         body.applyLinearImpulse(body.getLinearVelocity().cpy().scl(-drag), body.getWorldCenter(), true);
 
         slideTime = Math.max(slideTime - 0.016f, 0);
+
+        if (hitOilSlick){
+            for (int i=0;i<3;++i){
+                emitSmoke();
+            }
+            hitOilSlick = false;
+        }
     }
 
     private void runAi(){
@@ -143,16 +150,16 @@ public class Car extends Actor {
 
             ((OilSlick) a).oilLeft -= 50;
 
-            for (int i=0;i<3;++i){
-                emitSmoke();
-            }
+            hitOilSlick = true;
         }
 
         collidingWith.add(a);
     }
 
+    boolean hitOilSlick = false;
+
     private void emitSmoke() {
-        LD41.s.gs.actors.add(new Spark(body.getPosition().cpy().add(MathUtils.random(-2, 2), MathUtils.random(-2, 2)), 20, LD41.s.smoke, true, 0.03f));
+        LD41.s.gs.actors.add(new Spark(body.getPosition().cpy().add(MathUtils.random(-2, 2), MathUtils.random(-2, 2)), 20, LD41.s.smoke, true, 0.03f, 120.f));
     }
 
     @Override

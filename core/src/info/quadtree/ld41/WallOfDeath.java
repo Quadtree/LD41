@@ -60,11 +60,16 @@ public class WallOfDeath extends Actor {
 
     @Override
     protected int getRenderPass() {
-        return 4;
+        return 5;
     }
 
     @Override
     protected TextureRegion getTextureRegion() {
         return LD41.s.wallOfDeath;
+    }
+
+    @Override
+    protected boolean isSensor() {
+        return true;
     }
 }

@@ -98,7 +98,7 @@ public class GameState implements ContactListener {
             }
         }
 
-        for (int pass=0;pass<5;++pass) {
+        for (int pass=0;pass<6;++pass) {
             for (int i = 0; i < actors.size(); ++i) {
                 if (actors.get(i).getRenderPass() == pass)
                     actors.get(i).render();
