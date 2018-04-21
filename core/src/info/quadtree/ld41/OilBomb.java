@@ -12,16 +12,23 @@ public class OilBomb extends Actor {
 
     static final float PRJ_SPEED = 80;
 
+    float x = -0.5f;
+    float xChangeRate;
+
     public OilBomb(Vector2 startPos, Vector2 targetPos) {
         super(startPos);
 
         this.targetPos = targetPos.cpy();
 
-        Vector2 toTarget = targetPos.cpy().sub(startPos).nor();
+        Vector2 toTarget = targetPos.cpy().sub(startPos);
+        float rtt = toTarget.len();
+        toTarget.nor();
         float angle = toTarget.angle();
 
         body.setLinearVelocity(toTarget.scl(PRJ_SPEED));
         body.setTransform(body.getPosition(), angle * MathUtils.degreesToRadians);
+
+        xChangeRate = rtt / PRJ_SPEED * 0.016f * 4;
     }
 
     public static float calcFlightTime(float range){
@@ -33,13 +40,23 @@ public class OilBomb extends Actor {
         super.update();
 
         hitSomething();
+
+        x += xChangeRate;
+
+        if (x > 0.6f) System.out.println("x=" + x);
+    }
+
+    private float getAltitude(){
+        return (0.25f - (x*x)) * 4;
     }
 
     private void hitSomething() {
-        if (body.getPosition().dst2(targetPos) < 2*2){
+        //if (body.getPosition().dst2(targetPos) < 2*2){
+        if (x >= 0.5f) {
             hasGoneOff = true;
             LD41.s.gs.actors.add(new OilSlick(targetPos));
         }
+        //}
     }
 
     @Override
@@ -58,13 +75,6 @@ public class OilBomb extends Actor {
     }
 
     @Override
-    protected void collidedWith(Actor a) {
-        super.collidedWith(a);
-
-        if (a instanceof Wall) hitSomething();
-    }
-
-    @Override
     protected int getRenderPass() {
         return 3;
     }
@@ -76,6 +86,15 @@ public class OilBomb extends Actor {
 
     @Override
     public void render() {
-        doRender(LD41.s.oilBomb, new Color(1, 1, 1, 1));
+
+
+
+        float opac = MathUtils.lerp(1, 0.15f, MathUtils.clamp(getAltitude() * 2, 0, 1));
+
+        System.out.println(x + " - " + opac);
+
+        //System.err.println(opac);
+
+        doRender(LD41.s.oilBomb, new Color(1, 1, 1, opac));
     }
 }
