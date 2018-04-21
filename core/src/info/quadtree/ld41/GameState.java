@@ -132,17 +132,19 @@ public class GameState implements ContactListener {
             pcCar.steering = LD41.s.turnLeft ? 1 : (LD41.s.turnRight ? -1 : 0);
         }
 
-        for (int i=0;i<actors.size();++i){
-            if (actors.get(i).keep())
-                actors.get(i).update();
-            else {
-                actors.get(i).destroyed();
-                if (actors.get(i) == pcCar) pcCar = null;
-                actors.remove(i--);
+        if (started) {
+            for (int i = 0; i < actors.size(); ++i) {
+                if (actors.get(i).keep())
+                    actors.get(i).update();
+                else {
+                    actors.get(i).destroyed();
+                    if (actors.get(i) == pcCar) pcCar = null;
+                    actors.remove(i--);
+                }
             }
-        }
 
-        world.step(0.016f, 2, 2);
+            world.step(0.016f, 2, 2);
+        }
 
         if (getCarsLeft() == 1 && pcCar != null){
             hasWon = true;

@@ -45,6 +45,8 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	public TextureAtlas atlas;
 
+	boolean showingTitleScreen = true;
+
 	Matrix4 origProj = new Matrix4();
 	
 	@Override
@@ -74,9 +76,6 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		gs = new GameState();
 		gs.init();
 
-		// TODO: Remove
-		gs.started = true;
-
 		defaultFont = new BitmapFont(Gdx.files.internal("aldrich_24.fnt"));
 		bigFont = new BitmapFont(Gdx.files.internal("aldrich_90.fnt"));
 
@@ -93,6 +92,15 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 		batch.setProjectionMatrix(origProj.cpy());
 		batch.begin();
+
+		if (showingTitleScreen){
+			Util.drawTextCentered("Last Car Standing", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 350);
+			Util.drawTextCentered("Outrun the wall of doom and be the last car standing!", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 220);
+			Util.drawTextCentered("WASD/Arrow Keys to move, Space to shoot oil bomb, R to restart", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 190);
+			Util.drawTextCentered("Press any key to start", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 160);
+
+			Util.drawTextCentered("Made by Quadtree for Ludum Dare 41", defaultFont, Gdx.graphics.getWidth() - 290, 45);
+		}
 
 		if (gs.hasLost){
 			Util.drawTextCentered("You have lost!", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 120);
@@ -134,6 +142,12 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
+		if (showingTitleScreen){
+			showingTitleScreen = false;
+			gs.started = true;
+			return true;
+		}
+
 		if (keycode == Input.Keys.W){
 			accel = true;
 			return true;
