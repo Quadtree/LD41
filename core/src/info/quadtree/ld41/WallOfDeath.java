@@ -28,6 +28,15 @@ public class WallOfDeath extends Actor {
         if (maxCarY - body.getPosition().y > 150){
             body.setTransform(body.getPosition().cpy().add(0, 0.2f), 0);
         }
+
+        if (maxCarY > 750){
+            body.setTransform(body.getPosition().cpy().add(0, 1.5f), 0);
+        }
+    }
+
+    @Override
+    public boolean keep() {
+        return LD41.s.gs.getCarsLeft() > 1;
     }
 
     @Override

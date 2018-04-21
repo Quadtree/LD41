@@ -46,6 +46,10 @@ public class Car extends Actor {
 
         if (hasAi) runAi();
 
+        if (!hasAi){
+            System.out.println(body.getPosition());
+        }
+
         --shootOdds;
 
         ++oilSlickCharge;
