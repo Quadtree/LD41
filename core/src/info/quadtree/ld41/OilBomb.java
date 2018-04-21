@@ -1,5 +1,6 @@
 package info.quadtree.ld41;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -67,5 +68,10 @@ public class OilBomb extends Actor {
     @Override
     protected TextureRegion getTextureRegion() {
         return LD41.s.oilBomb;
+    }
+
+    @Override
+    public void render() {
+        doRender(LD41.s.oilBomb, new Color(1, 1, 1, 1));
     }
 }
