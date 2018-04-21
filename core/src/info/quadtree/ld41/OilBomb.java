@@ -1,5 +1,6 @@
 package info.quadtree.ld41;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
@@ -15,7 +16,11 @@ public class OilBomb extends Actor {
 
         this.targetPos = targetPos.cpy();
 
-        body.setLinearVelocity(targetPos.cpy().sub(startPos).nor().scl(PRJ_SPEED));
+        Vector2 toTarget = targetPos.cpy().sub(startPos).nor();
+        float angle = toTarget.angle();
+
+        body.setLinearVelocity(toTarget.scl(PRJ_SPEED));
+        body.setTransform(body.getPosition(), angle * MathUtils.degreesToRadians);
     }
 
     @Override
@@ -39,7 +44,7 @@ public class OilBomb extends Actor {
 
     @Override
     protected Vector2 getSize() {
-        return new Vector2(0.1f, 0.1f);
+        return new Vector2(1.5f, 1.5f);
     }
 
     @Override
@@ -57,5 +62,10 @@ public class OilBomb extends Actor {
     @Override
     protected int getRenderPass() {
         return 3;
+    }
+
+    @Override
+    protected TextureRegion getTextureRegion() {
+        return LD41.s.oilBomb;
     }
 }

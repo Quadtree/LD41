@@ -35,6 +35,8 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public Sprite road;
 	public Sprite barrier;
 	public Sprite grass;
+	public Sprite oilSlick;
+	public Sprite oilBomb;
 
 	public TextureAtlas atlas;
 
@@ -54,6 +56,9 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		road = atlas.createSprite("road");
 		barrier = atlas.createSprite("barrier1");
 		grass = atlas.createSprite("grass1");
+		oilSlick = atlas.createSprite("oil_slick");
+		oilBomb = atlas.createSprite("oil_bomb");
+
 
 		batch = new SpriteBatch();
 		origProj = batch.getProjectionMatrix().cpy();

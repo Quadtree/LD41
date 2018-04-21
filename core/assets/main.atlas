@@ -6,56 +6,77 @@ filter: Nearest,Nearest
 repeat: none
 barrier1
   rotate: false
-  xy: 81, 68
+  xy: 211, 224
   size: 43, 11
   orig: 43, 11
   offset: 0, 0
   index: -1
 car1_body
   rotate: false
-  xy: 47, 55
+  xy: 177, 211
   size: 32, 24
   orig: 32, 24
   offset: 0, 0
   index: -1
 car1_canopy
   rotate: false
-  xy: 132, 151
+  xy: 2, 2
   size: 32, 24
   orig: 32, 24
   offset: 0, 0
   index: -1
 car1_wheels
   rotate: false
-  xy: 166, 185
+  xy: 81, 81
   size: 32, 24
   orig: 32, 24
   offset: 0, 0
   index: -1
 grass1
   rotate: false
-  xy: 2, 36
+  xy: 2, 62
   size: 43, 43
   orig: 43, 43
   offset: 0, 0
   index: -1
+grass2
+  rotate: false
+  xy: 132, 192
+  size: 43, 43
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+oil_bomb
+  rotate: false
+  xy: 132, 140
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+oil_slick
+  rotate: false
+  xy: 2, 28
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 road
   rotate: false
-  xy: 2, 81
+  xy: 2, 107
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 solid
   rotate: false
-  xy: 132, 177
+  xy: 47, 73
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 wall_of_death
   rotate: false
-  xy: 2, 2
+  xy: 132, 158
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

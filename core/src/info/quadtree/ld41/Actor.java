@@ -38,6 +38,10 @@ public class Actor {
         }
     }
 
+    protected float renderSizeMul(){
+        return 1;
+    }
+
     public void update(){}
     public void render(){
         // Texture texture, float x, float y, float originX, float originY, float width, float height, float scaleX,
@@ -47,7 +51,7 @@ public class Actor {
     }
 
     protected void doRender(TextureRegion region) {
-        LD41.s.batch.draw(region, body.getPosition().x - 0.5f, body.getPosition().y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, getSize().x, getSize().y, MathUtils.radiansToDegrees * body.getAngle());
+        LD41.s.batch.draw(region, body.getPosition().x - 0.5f, body.getPosition().y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, getSize().x * renderSizeMul(), getSize().y * renderSizeMul(), MathUtils.radiansToDegrees * body.getAngle());
     }
 
     protected void doRender(Sprite region, Color color) {

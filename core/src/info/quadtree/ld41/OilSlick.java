@@ -13,7 +13,7 @@ public class OilSlick extends Actor {
 
     @Override
     protected TextureRegion getTextureRegion() {
-        return super.getTextureRegion();
+        return LD41.s.oilSlick;
     }
 
     @Override
@@ -46,5 +46,10 @@ public class OilSlick extends Actor {
     @Override
     protected int getRenderPass() {
         return 1;
+    }
+
+    @Override
+    protected float renderSizeMul() {
+        return 1.3f;
     }
 }
