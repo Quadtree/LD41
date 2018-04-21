@@ -93,7 +93,7 @@ public class Car extends Actor {
     }
 
     private void runAi(){
-        Vector2 trgDest = new Vector2(body.getPosition().y < turnIn ? body.getPosition().x : 0, body.getPosition().y + 30);
+        Vector2 trgDest = new Vector2(body.getPosition().x, body.getPosition().y + 30);
 
         float leftDst = new Vector2(1, 0).rotateRad(body.getAngle() + 0.02f).add(body.getPosition()).dst2(trgDest);
         float rightDst = new Vector2(1, 0).rotateRad(body.getAngle() - 0.02f).add(body.getPosition()).dst2(trgDest);
@@ -151,7 +151,7 @@ public class Car extends Actor {
 
         for (Actor a : LD41.s.gs.actors){
             if (a instanceof Car && a != this){
-                if (a.body.getPosition().y > target.y){
+                if (a.body.getPosition().y + MathUtils.random(3) > target.y){
                     target = a.body.getPosition();
                     targetSpeed = a.body.getLinearVelocity().len();
                 }

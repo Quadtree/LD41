@@ -47,7 +47,7 @@ public class GameState implements ContactListener {
 
         camPos = pcCar.body.getPosition().cpy();
 
-        actors.add(new WallOfDeath(new Vector2(0, -100)));
+        actors.add(new WallOfDeath(new Vector2(0, -200)));
     }
 
     public void render(){

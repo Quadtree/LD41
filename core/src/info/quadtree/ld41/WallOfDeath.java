@@ -24,7 +24,7 @@ public class WallOfDeath extends Actor {
         }
 
         if (maxCarY - body.getPosition().y > 150){
-            body.setTransform(body.getPosition().cpy().add(0, 0.6f), 0);
+            body.setTransform(body.getPosition().cpy().add(0, 0.2f), 0);
         }
     }
 
@@ -40,7 +40,7 @@ public class WallOfDeath extends Actor {
 
     @Override
     protected Vector2 getSize() {
-        return new Vector2(100, 100);
+        return new Vector2(200, 200);
     }
 
     @Override
