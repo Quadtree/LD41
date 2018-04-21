@@ -42,6 +42,10 @@ public class Car extends Actor {
 
     @Override
     public void update() {
+        if (LD41.s.gs.startTime > 0){
+            return;
+        }
+
         super.update();
 
         if (hasAi) runAi();

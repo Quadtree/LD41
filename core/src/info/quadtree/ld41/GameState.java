@@ -24,6 +24,9 @@ public class GameState implements ContactListener {
 
     Vector2 camPos = new Vector2();
 
+    float startTime = 3;
+    boolean started = false;
+
     boolean hasWon = false;
     boolean hasLost = false;
 
@@ -143,6 +146,8 @@ public class GameState implements ContactListener {
         }
 
         if (pcCar == null) hasLost = true;
+
+        if (started) startTime -= 0.016f;
     }
 
     @Override
