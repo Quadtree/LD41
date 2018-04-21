@@ -15,6 +15,7 @@ public class Actor {
         bd.type = getBodyType();
         bd.position.x = startPos.x;
         bd.position.y = startPos.y;
+        bd.angle = 90;
 
         body = LD41.s.gs.world.createBody(bd);
 

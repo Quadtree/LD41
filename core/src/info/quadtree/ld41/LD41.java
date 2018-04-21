@@ -7,7 +7,9 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 
 public class LD41 extends ApplicationAdapter implements InputProcessor {
@@ -18,16 +20,21 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	public GameState gs;
 
+	public BitmapFont defaultFont;
 
+	Matrix4 origProj = new Matrix4();
 	
 	@Override
 	public void create () {
 		LD41.s = this;
 		batch = new SpriteBatch();
+		origProj = batch.getProjectionMatrix().cpy();
 		img = new Texture("badlogic.jpg");
 
 		gs = new GameState();
 		gs.init();
+
+		defaultFont = new BitmapFont();
 
 		Gdx.input.setInputProcessor(this);
 	}
@@ -39,6 +46,13 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gs.render();
+
+		batch.setProjectionMatrix(origProj.cpy());
+		batch.begin();
+		defaultFont.draw(batch, String.format("FPS: %d", Gdx.graphics.getFramesPerSecond()), 40, 40);
+		batch.end();
+
+
 	}
 	
 	@Override

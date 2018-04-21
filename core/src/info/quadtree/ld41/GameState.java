@@ -26,8 +26,13 @@ public class GameState {
     }
 
     public void init(){
-        actors.add(new Car(new Vector2(20, 20)));
-        pcCar = (Car)actors.get(0);
+        for (int i=0;i<20;++i){
+            for (int j=0;j<5;++j){
+                pcCar = new Car(new Vector2((i - 5) * 4, j * 4));
+                actors.add(pcCar);
+            }
+        }
+
     }
 
     public void render(){
