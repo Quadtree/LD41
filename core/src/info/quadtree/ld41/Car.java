@@ -23,6 +23,8 @@ public class Car extends Actor {
 
     public int oilSlickCharge = 0;
 
+    int shootOdds = 1800;
+
     boolean isAlive = true;
 
     Set<Actor> collidingWith = new HashSet<Actor>();
@@ -36,6 +38,8 @@ public class Car extends Actor {
         super.update();
 
         if (hasAi) runAi();
+
+        --shootOdds;
 
         ++oilSlickCharge;
 
@@ -113,7 +117,7 @@ public class Car extends Actor {
             acceleration = -1;
         }
 
-        if (MathUtils.random(1500) == 0) fireOilSlick();
+        if (MathUtils.random(Math.max(1, shootOdds)) == 0) fireOilSlick();
     }
 
     protected Vector2 getSize(){ return new Vector2(3,2); }
@@ -141,6 +145,7 @@ public class Car extends Actor {
 
     public void fireOilSlick(){
         if (oilSlickCharge < 240) return;
+        oilSlickCharge = 0;
         Vector2 target = new Vector2(0, -10000);
         float targetSpeed = 0;
 
