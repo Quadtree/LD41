@@ -1,3 +1,3 @@
-* Optimize some overdraw
+* ~~Optimize some overdraw~~
 * Better AI
 * Music

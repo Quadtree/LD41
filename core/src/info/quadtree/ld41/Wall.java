@@ -50,16 +50,19 @@ public class Wall extends Actor {
             cp1.add(add);
 
             for (int j=0;j<24;++j){
-                LD41.s.batch.draw(LD41.s.grass, cp1.x - 0.5f, cp1.y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, segLength * 1.01f, segLength * 1.01f, MathUtils.radiansToDegrees * body.getAngle());
+                if (Util.isDrawable(cp1.x, cp1.y, 10)) {
+                    LD41.s.batch.draw(LD41.s.grass, cp1.x - 0.5f, cp1.y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, segLength * 1.01f, segLength * 1.01f, MathUtils.radiansToDegrees * body.getAngle());
 
-                add.y = segLength;
-                add.x = 0;
-                add.rotateRad(body.getAngle());
-                cp1.add(add);
+                    add.y = segLength;
+                    add.x = 0;
+                    add.rotateRad(body.getAngle());
+                    cp1.add(add);
+                }
             }
 
-            LD41.s.batch.draw(LD41.s.barrier, cp.x - 0.5f, cp.y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, segLength * 1.01f, segWidth * 1.01f, MathUtils.radiansToDegrees * body.getAngle());
-
+            if (Util.isDrawable(cp.x, cp.y, 10)) {
+                LD41.s.batch.draw(LD41.s.barrier, cp.x - 0.5f, cp.y - 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, segLength * 1.01f, segWidth * 1.01f, MathUtils.radiansToDegrees * body.getAngle());
+            }
 
 
 
