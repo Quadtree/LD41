@@ -193,6 +193,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 		//defaultFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond() + " Position: " + gs.getPlayerPosition() + "/" + gs.getCarsLeft() + " Speed: " + (int)(gs.pcCar != null ? gs.pcCar.body.getLinearVelocity().len() : 0), 40, 40);
 		if (gs.pcCar != null && !showingTitleScreen) {
+			if (gs.pcCar.isOilSlickReady()) batch.draw(LD41.s.oilBomb, Gdx.graphics.getWidth() - 70, Gdx.graphics.getHeight() - 24, 8, 8, 16, 16, 1, 1, 90);
 			defaultFont.draw(batch, Objects.toString((int) (gs.pcCar != null ? gs.pcCar.body.getLinearVelocity().len() : 0)), Gdx.graphics.getWidth() - 40, Gdx.graphics.getHeight() - 5);
 			defaultFont.draw(batch, gs.getPlayerPosition() + "/" + gs.getCarsLeft(), 5, Gdx.graphics.getHeight() - 5);
 		}

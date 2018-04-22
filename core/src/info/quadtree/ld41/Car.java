@@ -183,7 +183,7 @@ public class Car extends Actor {
     }
 
     public void fireOilSlick(){
-        if (oilSlickCharge < 240) return;
+        if (!isOilSlickReady()) return;
         oilSlickCharge = 0;
         Vector2 target = new Vector2(0, -10000);
         Vector2 vtp = new Vector2();
@@ -205,6 +205,10 @@ public class Car extends Actor {
         float inaccuracy = rangeToTarget * 0.1f;
 
         LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * OilBomb.calcFlightTime(rangeToTarget) * 1.75f).add(0, 15).add(MathUtils.random(-inaccuracy, inaccuracy), MathUtils.random(-inaccuracy, inaccuracy))));
+    }
+
+    public boolean isOilSlickReady() {
+        return oilSlickCharge >= 240;
     }
 
     @Override
