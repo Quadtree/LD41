@@ -159,7 +159,7 @@ public class Car extends Actor {
             ((OilSlick) a).oilLeft -= 50;
 
             hitOilSlick = true;
-            Util.playRandomSound(LD41.s.slipSounds, body.getPosition().x, body.getPosition().y, 10);
+            Util.playRandomSound(LD41.s.slipSounds, body.getPosition().x, body.getPosition().y, 25);
         }
 
         collidingWith.add(a);

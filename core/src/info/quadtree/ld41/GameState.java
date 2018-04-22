@@ -160,7 +160,9 @@ public class GameState implements ContactListener {
         if (started){
             if (startTime > 0.25f){
                 msg1Phase = Math.min(msg1Phase + 0.05f, 0.5f);
+                if (!getReadySoundPlayed){ LD41.s.getReadySound.play(0.5f); getReadySoundPlayed = true; }
             } else if (startTime > -0.25f) {
+                if (!goSoundPlayed){ LD41.s.goSound.play(0.5f); goSoundPlayed = true; }
                 msg1Phase = Math.min(msg1Phase + 0.05f, 1.5f);
                 msg2Phase = Math.min(msg2Phase + 0.05f, 0.5f);
             } else {
@@ -168,6 +170,9 @@ public class GameState implements ContactListener {
             }
         }
     }
+
+    boolean getReadySoundPlayed = false;
+    boolean goSoundPlayed = false;
 
     @Override
     public void beginContact(Contact contact) {

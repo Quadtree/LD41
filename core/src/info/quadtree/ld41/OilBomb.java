@@ -56,7 +56,7 @@ public class OilBomb extends Actor {
             hasGoneOff = true;
             LD41.s.gs.actors.add(new OilSlick(targetPos));
 
-            Util.playRandomSound(LD41.s.oilSounds, body.getPosition().x, body.getPosition().y, 10);
+            Util.playRandomSound(LD41.s.oilSounds, body.getPosition().x, body.getPosition().y, 25);
         }
     }
 
