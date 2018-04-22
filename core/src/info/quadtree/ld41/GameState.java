@@ -1,6 +1,9 @@
 package info.quadtree.ld41;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
@@ -134,6 +137,26 @@ public class GameState implements ContactListener {
 
             pcCar.acceleration = LD41.s.accel ? 1 : (LD41.s.brake ? -1 : 0);
             pcCar.steering = (LD41.s.turnLeft ? 1 : (LD41.s.turnRight ? -1 : 0)) * (pcCar.isGoingForward() ? 1 : -1);
+
+            for (Controller c : Controllers.getControllers()){
+                //System.out.println(c.getAxis(0) + " " + c.getAxis(1) + " " + c.getButton(0));
+                pcCar.acceleration = -c.getAxis(0);
+                pcCar.steering = -c.getAxis(1);
+
+                if (c.getButton(0)){
+                    pcCar.fireOilSlick();
+
+                    LD41.s.showingTitleScreen = false;
+                    started = true;
+                }
+
+                if (c.getButton(1)){
+                    LD41.s.gs = new GameState();
+                    LD41.s.gs.init();
+                    LD41.s.gs.started = true;
+                    return;
+                }
+            }
         }
 
         if (started) {
