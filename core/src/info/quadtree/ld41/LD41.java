@@ -248,7 +248,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			return true;
 		}
 
-		if (keycode == Input.Keys.SPACE){
+		if (keycode == Input.Keys.SPACE && gs.pcCar != null){
 			gs.pcCar.fireOilSlick();
 			return true;
 		}
