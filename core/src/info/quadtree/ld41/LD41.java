@@ -164,8 +164,10 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		if (showingTitleScreen){
 			Util.drawTextCentered("Last Car Standing", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 350);
 			Util.drawTextCentered("Outrun the wall of doom and be the last car standing!", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 220);
-			Util.drawTextCentered("WASD/Arrow Keys to move, Space to shoot oil bomb, R to restart", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 190);
-			Util.drawTextCentered("Press any key to start", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 160);
+			Util.drawTextCentered("WASD/Arrow Keys to move, Space to shoot oil bombs, R to restart", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 190);
+			Util.drawTextCentered("The bomb will auto-target at the car in the lead,", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 160);
+			Util.drawTextCentered("and is only effective against cars going fast.", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 130);
+			Util.drawTextCentered("Press any key to start", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 70);
 
 			Util.drawTextCentered("Made by Quadtree for Ludum Dare 41", defaultFont, Gdx.graphics.getWidth() - 290, 45);
 		}
@@ -215,19 +217,19 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			gs.started = true;
 		}
 
-		if (keycode == Input.Keys.W){
+		if (keycode == Input.Keys.W || keycode == Input.Keys.UP){
 			accel = true;
 			return true;
 		}
-		if (keycode == Input.Keys.S){
+		if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN){
 			brake = true;
 			return true;
 		}
-		if (keycode == Input.Keys.A){
+		if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT){
 			turnLeft = true;
 			return true;
 		}
-		if (keycode == Input.Keys.D){
+		if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT){
 			turnRight = true;
 			return true;
 		}
@@ -255,19 +257,19 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		if (keycode == Input.Keys.W){
+		if (keycode == Input.Keys.W || keycode == Input.Keys.UP){
 			accel = false;
 			return true;
 		}
-		if (keycode == Input.Keys.S){
+		if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN){
 			brake = false;
 			return true;
 		}
-		if (keycode == Input.Keys.A){
+		if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT){
 			turnLeft = false;
 			return true;
 		}
-		if (keycode == Input.Keys.D){
+		if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT){
 			turnRight = false;
 			return true;
 		}
