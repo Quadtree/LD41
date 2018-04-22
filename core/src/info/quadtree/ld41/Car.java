@@ -121,11 +121,11 @@ public class Car extends Actor {
     private void runAi(){
         Vector2 trgDest = new Vector2(body.getPosition().x, body.getPosition().y + 30);
 
-        float leftDst = new Vector2(1, 0).rotateRad(body.getAngle() + 0.15f).add(body.getPosition()).dst2(trgDest);
-        float leftCenterDst = new Vector2(1, 0).rotateRad(body.getAngle() + 0.02f).add(body.getPosition()).dst2(trgDest);
-        float centerDist = new Vector2(1, 0).rotateRad(body.getAngle() + 0.00f).add(body.getPosition()).dst2(trgDest);
-        float rightCenterDst = new Vector2(1, 0).rotateRad(body.getAngle() + 0.02f).add(body.getPosition()).dst2(trgDest);
-        float rightDst = new Vector2(1, 0).rotateRad(body.getAngle() - 0.15f).add(body.getPosition()).dst2(trgDest);
+        float leftDst = Util.TV.set(1, 0).rotateRad(body.getAngle() + 0.15f).add(body.getPosition()).dst2(trgDest);
+        float leftCenterDst = Util.TV.set(1, 0).rotateRad(body.getAngle() + 0.02f).add(body.getPosition()).dst2(trgDest);
+        float centerDist = Util.TV.set(1, 0).rotateRad(body.getAngle() + 0.00f).add(body.getPosition()).dst2(trgDest);
+        float rightCenterDst = Util.TV.set(1, 0).rotateRad(body.getAngle() + 0.02f).add(body.getPosition()).dst2(trgDest);
+        float rightDst = Util.TV.set(1, 0).rotateRad(body.getAngle() - 0.15f).add(body.getPosition()).dst2(trgDest);
 
         if (leftDst < rightDst && leftDst < centerDist && leftDst < leftCenterDst && leftDst < rightCenterDst){
             steering = 1;
@@ -213,7 +213,7 @@ public class Car extends Actor {
 
         float inaccuracy = rangeToTarget * 0.1f;
 
-        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * OilBomb.calcFlightTime(rangeToTarget) * 1.75f).add(0, 15).add(MathUtils.random(-inaccuracy, inaccuracy), MathUtils.random(-inaccuracy, inaccuracy))));
+        LD41.s.gs.actors.add(new OilBomb(body.getPosition(), target.cpy().add(0, targetSpeed * OilBomb.calcFlightTime(rangeToTarget) * 2.25f).add(0, 15).add(MathUtils.random(-inaccuracy, inaccuracy), MathUtils.random(-inaccuracy, inaccuracy))));
     }
 
     public boolean isOilSlickReady() {

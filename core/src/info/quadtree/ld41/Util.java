@@ -45,5 +45,7 @@ public class Util {
         }
     }
 
+    public final static Vector2 TV = new Vector2();
+
     public static Runnable takeScreenshot = () -> {};
 }
