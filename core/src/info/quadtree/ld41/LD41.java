@@ -58,7 +58,10 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			"swiftness"
 	};
 
-	public 
+	public List<Sound> oilSounds = new ArrayList<>();
+	public List<Sound> slipSounds = new ArrayList<>();
+
+	public
 
 	Music currentMusic;
 
@@ -91,6 +94,14 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 		for (int i=0;i<4;++i){
 			explosionSounds.add(Gdx.audio.newSound(Gdx.files.internal("exp" + i + ".wav")));
+		}
+
+		for (int i=0;i<3;++i){
+			oilSounds.add(Gdx.audio.newSound(Gdx.files.internal("oil" + i + ".wav")));
+		}
+
+		for (int i=0;i<3;++i){
+			slipSounds.add(Gdx.audio.newSound(Gdx.files.internal("slip" + i + ".wav")));
 		}
 
 

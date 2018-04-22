@@ -1,8 +1,13 @@
 package info.quadtree.ld41;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
+
+import java.util.List;
 
 public class Util {
     public static void drawTextCentered(String text, BitmapFont font, float x, float y){
@@ -21,5 +26,18 @@ public class Util {
         if (y < LD41.s.gs.camPos.y - sh / 2 - padding) return false;
 
         return true;
+    }
+
+    public static void playRandomSound(List<Sound> snds, float x, float y, float atten){
+        float distSqr = 10000;
+        if (LD41.s.gs.pcCar != null){
+            distSqr = new Vector2(x,y).dst2(LD41.s.gs.pcCar.body.getPosition());
+        } else {
+            distSqr = new Vector2(x, y).dst2(LD41.s.gs.camPos);
+        }
+
+        if (distSqr < atten*atten) {
+            snds.get(MathUtils.random(snds.size() - 1)).play(MathUtils.clamp(1 - (distSqr / (atten*atten)), 0, 1));
+        }
     }
 }
