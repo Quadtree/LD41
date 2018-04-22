@@ -101,6 +101,8 @@ public class Car extends Actor {
 
         if (slideTime > 0.1f) drag += 0.25f;
 
+        if (!isGoingForward()) drag += 0.1f;
+
         // drag
         body.applyLinearImpulse(body.getLinearVelocity().cpy().scl(-drag), body.getWorldCenter(), true);
 
@@ -115,7 +117,7 @@ public class Car extends Actor {
     }
 
     public boolean isGoingForward(){
-        return body.getLinearVelocity().cpy().rotateRad(-body.getAngle()).x > 0;
+        return Util.TV.set(body.getLinearVelocity()).rotateRad(-body.getAngle()).x > 0;
     }
 
     private void runAi(){
