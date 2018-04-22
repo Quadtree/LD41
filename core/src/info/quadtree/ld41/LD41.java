@@ -173,7 +173,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			Util.drawTextCentered("Outrun the wall of doom and be the last car standing!", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 130));
 			Util.drawTextCentered("WASD/Arrow Keys to move, Space to shoot oil bombs, R to restart", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 30));
 			Util.drawTextCentered("The bomb will auto-target at the car in the lead,", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 30));
-			Util.drawTextCentered("and is only effective against cars going fast.", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 30));
+			Util.drawTextCentered("and is only effective against cars going at high speed.", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 30));
 			Util.drawTextCentered("Press any key to start", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 60));
 
 			Util.drawTextCentered("Made by Quadtree for Ludum Dare 41", defaultFont, Gdx.graphics.getWidth() - 290, 45);
