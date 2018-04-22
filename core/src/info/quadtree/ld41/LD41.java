@@ -58,6 +58,8 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			"swiftness"
 	};
 
+	public 
+
 	Music currentMusic;
 
 	Map<String, Music> musicCache = new HashMap<>();
