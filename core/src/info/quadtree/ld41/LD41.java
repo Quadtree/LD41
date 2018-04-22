@@ -30,7 +30,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public BitmapFont defaultFont;
 	public BitmapFont bigFont;
 
-	public static final boolean CHEATS = true;
+	public static final boolean CHEATS = false;
     public static final boolean DEBUG_PHYSICS = false;
 
 	public static final boolean MUSIC = true;
@@ -49,6 +49,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public Sprite oilBomb;
 	public Sprite fragment;
 	public Sprite smoke;
+	public Sprite gradient;
 
 	public List<Sound> explosionSounds = new ArrayList<>();
 
@@ -98,6 +99,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		oilBomb = atlas.createSprite("oil_bomb");
 		fragment = atlas.createSprite("fragment1");
 		smoke = atlas.createSprite("smoke2");
+		gradient = atlas.createSprite("gradient");
 
 		for (int i=0;i<4;++i){
 			explosionSounds.add(Gdx.audio.newSound(Gdx.files.internal("exp" + i + ".wav")));
@@ -162,12 +164,15 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		batch.begin();
 
 		if (showingTitleScreen){
-			Util.drawTextCentered("Last Car Standing", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 350);
-			Util.drawTextCentered("Outrun the wall of doom and be the last car standing!", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 220);
-			Util.drawTextCentered("WASD/Arrow Keys to move, Space to shoot oil bombs, R to restart", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 190);
-			Util.drawTextCentered("The bomb will auto-target at the car in the lead,", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 160);
-			Util.drawTextCentered("and is only effective against cars going fast.", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 130);
-			Util.drawTextCentered("Press any key to start", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 70);
+			batch.draw(LD41.s.gradient, 0, Gdx.graphics.getHeight() - 350, Gdx.graphics.getWidth(), 350);
+
+			int y = 400;
+			Util.drawTextCentered("Last Car Standing", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + y);
+			Util.drawTextCentered("Outrun the wall of doom and be the last car standing!", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 130));
+			Util.drawTextCentered("WASD/Arrow Keys to move, Space to shoot oil bombs, R to restart", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 30));
+			Util.drawTextCentered("The bomb will auto-target at the car in the lead,", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 30));
+			Util.drawTextCentered("and is only effective against cars going fast.", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 30));
+			Util.drawTextCentered("Press any key to start", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 60));
 
 			Util.drawTextCentered("Made by Quadtree for Ludum Dare 41", defaultFont, Gdx.graphics.getWidth() - 290, 45);
 		}
@@ -185,7 +190,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		if (CHEATS) defaultFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 40, 40);
 
 		//defaultFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond() + " Position: " + gs.getPlayerPosition() + "/" + gs.getCarsLeft() + " Speed: " + (int)(gs.pcCar != null ? gs.pcCar.body.getLinearVelocity().len() : 0), 40, 40);
-		if (gs.pcCar != null) {
+		if (gs.pcCar != null && !showingTitleScreen) {
 			defaultFont.draw(batch, Objects.toString((int) (gs.pcCar != null ? gs.pcCar.body.getLinearVelocity().len() : 0)), Gdx.graphics.getWidth() - 40, Gdx.graphics.getHeight() - 5);
 			defaultFont.draw(batch, gs.getPlayerPosition() + "/" + gs.getCarsLeft(), 5, Gdx.graphics.getHeight() - 5);
 		}
