@@ -120,8 +120,10 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		getReadySound = Gdx.audio.newSound(Gdx.files.internal("get_ready.wav"));
 		goSound = Gdx.audio.newSound(Gdx.files.internal("go.wav"));
 
-		for (int i=0;i<7;++i){
-			engine.add(Gdx.audio.newMusic(Gdx.files.internal("engine" + i + ".ogg")));
+		if (ENGINE_NOISE) {
+			for (int i = 0; i < 7; ++i) {
+				engine.add(Gdx.audio.newMusic(Gdx.files.internal("engine" + i + ".ogg")));
+			}
 		}
 
 
