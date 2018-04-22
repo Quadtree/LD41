@@ -44,4 +44,6 @@ public class Util {
             snds.get(MathUtils.random(snds.size() - 1)).play(MathUtils.clamp(1 - (distSqr / (atten*atten)), 0, 1) * vol);
         }
     }
+
+    public static Runnable takeScreenshot = () -> {};
 }

@@ -253,6 +253,11 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			return true;
 		}
 
+		if (keycode == Input.Keys.F12){
+			Util.takeScreenshot.run();
+			return true;
+		}
+
 		if (CHEATS) {
 			if (keycode == Input.Keys.U) {
 				gs.pcCar.body.setTransform(gs.pcCar.body.getPosition().cpy().add(0, 200), gs.pcCar.body.getAngle());
