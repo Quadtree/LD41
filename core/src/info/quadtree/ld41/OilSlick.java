@@ -12,6 +12,7 @@ public class OilSlick extends Actor {
 
     public OilSlick(Vector2 startPos) {
         super(startPos);
+        body.setTransform(body.getPosition(), MathUtils.random(-MathUtils.PI, MathUtils.PI));
     }
 
     @Override

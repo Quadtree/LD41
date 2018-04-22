@@ -121,13 +121,22 @@ public class Car extends Actor {
     private void runAi(){
         Vector2 trgDest = new Vector2(body.getPosition().x, body.getPosition().y + 30);
 
-        float leftDst = new Vector2(1, 0).rotateRad(body.getAngle() + 0.02f).add(body.getPosition()).dst2(trgDest);
-        float rightDst = new Vector2(1, 0).rotateRad(body.getAngle() - 0.02f).add(body.getPosition()).dst2(trgDest);
+        float leftDst = new Vector2(1, 0).rotateRad(body.getAngle() + 0.15f).add(body.getPosition()).dst2(trgDest);
+        float leftCenterDst = new Vector2(1, 0).rotateRad(body.getAngle() + 0.02f).add(body.getPosition()).dst2(trgDest);
+        float centerDist = new Vector2(1, 0).rotateRad(body.getAngle() + 0.00f).add(body.getPosition()).dst2(trgDest);
+        float rightCenterDst = new Vector2(1, 0).rotateRad(body.getAngle() + 0.02f).add(body.getPosition()).dst2(trgDest);
+        float rightDst = new Vector2(1, 0).rotateRad(body.getAngle() - 0.15f).add(body.getPosition()).dst2(trgDest);
 
-        if (leftDst < rightDst){
+        if (leftDst < rightDst && leftDst < centerDist && leftDst < leftCenterDst && leftDst < rightCenterDst){
             steering = 1;
-        } else {
+        } else if (rightDst < leftDst && rightDst < centerDist && rightDst < leftCenterDst && rightDst < rightCenterDst) {
             steering = -1;
+        } else if (leftCenterDst < leftDst && leftCenterDst < centerDist && leftCenterDst < rightDst && leftCenterDst < rightCenterDst) {
+            steering = -0.1f;
+        } else if (rightCenterDst < leftDst && rightCenterDst < centerDist && rightCenterDst < leftCenterDst && rightCenterDst < rightDst) {
+            steering = 0.1f;
+        } else {
+            steering = 0;
         }
 
         if (body.getLinearVelocity().len() < 2f){
