@@ -153,11 +153,9 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 			if (currentMusic == null) nextMusic = "gotta_go_fast";
 
-			if (!musicCache.containsKey(nextMusic)){
-				musicCache.put(nextMusic, Gdx.audio.newMusic(Gdx.files.internal(nextMusic + ".mid.ogg")));
-			}
-
-			currentMusic = musicCache.get(nextMusic);
+			if (currentMusic != null) currentMusic.dispose();
+			currentMusic = Gdx.audio.newMusic(Gdx.files.internal(nextMusic + ".mid.ogg"));
+			currentMusic.stop();
 			currentMusic.setVolume(0.25f);
 			currentMusic.play();
 
