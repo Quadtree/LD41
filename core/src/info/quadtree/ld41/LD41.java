@@ -35,7 +35,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	public static final boolean MUSIC = true;
 
-	public static final boolean ENGINE_NOISE = false;
+	public static final boolean ENGINE_NOISE = true;
 
 	public Sprite carWheels;
 	public Sprite carBody;
@@ -68,7 +68,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	public Sound getReadySound;
 	public Sound goSound;
-	public Sound engine;
+	public List<Music> engine = new ArrayList<>();
 
 	Music currentMusic;
 
@@ -117,7 +117,10 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 		getReadySound = Gdx.audio.newSound(Gdx.files.internal("get_ready.wav"));
 		goSound = Gdx.audio.newSound(Gdx.files.internal("go.wav"));
-		engine = Gdx.audio.newSound(Gdx.files.internal("engine.wav"));
+
+		for (int i=0;i<7;++i){
+			engine.add(Gdx.audio.newMusic(Gdx.files.internal("engine" + i + ".ogg")));
+		}
 
 
 		batch = new SpriteBatch();

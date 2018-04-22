@@ -1,5 +1,6 @@
 package info.quadtree.ld41;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
@@ -171,30 +172,41 @@ public class GameState implements ContactListener {
         }
 
         if (LD41.ENGINE_NOISE) {
+            float MAX_VOL = 0.4f;
+            float FADE_SPEED = 0.05f;
+
             if (pcCar != null) {
                 float speed = pcCar.body.getLinearVelocity().len();
 
                 if (Math.abs(speed) < 1) {
-                    if (engineNoiseInd != -1) {
-                        LD41.s.engine.stop(engineNoiseInd);
-                        engineNoiseInd = -1;
-                    }
+                    LD41.s.engine.forEach(Music::stop);
                 } else {
-                    if (engineNoiseInd == -1) engineNoiseInd = LD41.s.engine.loop();
+                    //if (engineNoiseInd == -1) engineNoiseInd = LD41.s.engine.loop();
 
-                    LD41.s.engine.setVolume(engineNoiseInd, MathUtils.clamp(speed / 10, 0, 1) * 0.35f);
-                    LD41.s.engine.setPitch(engineNoiseInd, MathUtils.clamp(0.5f + speed / 20, 0.5f, 2));
+                    final int curNum = MathUtils.clamp((int)(speed / 30 * 7), 0, 6);
+
+                    if (!LD41.s.engine.get(curNum).isPlaying()){
+                        LD41.s.engine.get(curNum).setLooping(true);
+                        LD41.s.engine.get(curNum).setVolume(0);
+                        LD41.s.engine.get(curNum).play();
+                    }
+
+                    LD41.s.engine.forEach(m -> {
+                       if (m.isPlaying()){
+                           if (m != LD41.s.engine.get(curNum)) {
+                               m.setVolume(Math.max(m.getVolume() - FADE_SPEED * MAX_VOL, 0));
+                               if (m.getVolume() < 0.1f) m.stop();
+                           } else {
+                               m.setVolume(Math.min(m.getVolume() + FADE_SPEED * MAX_VOL, MAX_VOL));
+                           }
+                       }
+                    });
                 }
             } else {
-                if (engineNoiseInd != -1) {
-                    LD41.s.engine.stop(engineNoiseInd);
-                    engineNoiseInd = -1;
-                }
+                LD41.s.engine.forEach(Music::stop);
             }
         }
     }
-
-    long engineNoiseInd = -1;
 
     boolean getReadySoundPlayed = false;
     boolean goSoundPlayed = false;
