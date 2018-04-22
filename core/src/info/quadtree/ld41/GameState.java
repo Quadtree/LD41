@@ -178,6 +178,10 @@ public class GameState implements ContactListener {
             if (pcCar != null) {
                 float speed = pcCar.body.getLinearVelocity().len();
 
+                if (startTime > 0 && LD41.s.accel){
+                    speed = 30;
+                }
+
                 if (Math.abs(speed) < 1) {
                     LD41.s.engine.forEach(Music::stop);
                 } else {
