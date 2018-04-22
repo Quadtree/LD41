@@ -29,6 +29,10 @@ public class Util {
     }
 
     public static void playRandomSound(List<Sound> snds, float x, float y, float atten){
+        playRandomSound(snds, x,y,atten, 1);
+    }
+
+    public static void playRandomSound(List<Sound> snds, float x, float y, float atten, float vol){
         float distSqr = 10000;
         if (LD41.s.gs.pcCar != null){
             distSqr = new Vector2(x,y).dst2(LD41.s.gs.pcCar.body.getPosition());
@@ -37,7 +41,7 @@ public class Util {
         }
 
         if (distSqr < atten*atten) {
-            snds.get(MathUtils.random(snds.size() - 1)).play(MathUtils.clamp(1 - (distSqr / (atten*atten)), 0, 1));
+            snds.get(MathUtils.random(snds.size() - 1)).play(MathUtils.clamp(1 - (distSqr / (atten*atten)), 0, 1) * vol);
         }
     }
 }

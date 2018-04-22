@@ -163,7 +163,7 @@ public class Car extends Actor {
         }
 
         if (a instanceof Car){
-            Util.playRandomSound(LD41.s.hitSounds, body.getPosition().x, body.getPosition().y, 8);
+            Util.playRandomSound(LD41.s.hitSounds, body.getPosition().x, body.getPosition().y, 8, 0.25f);
         }
 
         collidingWith.add(a);
