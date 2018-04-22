@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,12 +13,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public SpriteBatch batch;
@@ -32,6 +32,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	public static final boolean CHEATS = true;
 	public static final boolean DEBUG_PHYSICS = false;
+	public static final boolean MUSIC = true;
 
 	public Sprite carWheels;
 	public Sprite carBody;
@@ -47,6 +48,19 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public Sprite smoke;
 
 	public List<Sound> explosionSounds = new ArrayList<>();
+
+	public String[] musicNames = {
+			"carefree_racing",
+			"drum_drive",
+			"gotta_go_fast",
+			"ride_for_your_lives",
+			"swift_driving",
+			"swiftness"
+	};
+
+	Music currentMusic;
+
+	Map<String, Music> musicCache = new HashMap<>();
 
 	public TextureAtlas atlas;
 
@@ -93,7 +107,21 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public void render () {
+		if (MUSIC && currentMusic == null || !currentMusic.isPlaying()){
+			String nextMusic = musicNames[MathUtils.random(musicNames.length - 1)];
 
+			if (currentMusic == null) nextMusic = "gotta_go_fast";
+
+			if (!musicCache.containsKey(nextMusic)){
+				musicCache.put(nextMusic, Gdx.audio.newMusic(Gdx.files.internal(nextMusic + ".mid.ogg")));
+			}
+
+			currentMusic = musicCache.get(nextMusic);
+			currentMusic.setVolume(0.25f);
+			currentMusic.play();
+
+			System.out.println("Playing " + nextMusic);
+		}
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
