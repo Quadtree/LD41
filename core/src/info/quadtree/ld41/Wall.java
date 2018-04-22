@@ -68,4 +68,9 @@ public class Wall extends Actor {
 
         }
     }
+
+    @Override
+    protected int getRenderPass() {
+        return 1;
+    }
 }
