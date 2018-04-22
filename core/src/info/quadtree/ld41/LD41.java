@@ -32,7 +32,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	public static final boolean CHEATS = true;
 	public static final boolean DEBUG_PHYSICS = false;
-	public static final boolean MUSIC = true;
+	public static final boolean MUSIC = false;
 
 	public Sprite carWheels;
 	public Sprite carBody;
@@ -107,7 +107,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public void render () {
-		if (MUSIC && currentMusic == null || !currentMusic.isPlaying()){
+		if (MUSIC && (currentMusic == null || !currentMusic.isPlaying())){
 			String nextMusic = musicNames[MathUtils.random(musicNames.length - 1)];
 
 			if (currentMusic == null) nextMusic = "gotta_go_fast";
