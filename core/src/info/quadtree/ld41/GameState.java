@@ -138,23 +138,19 @@ public class GameState implements ContactListener {
             pcCar.acceleration = LD41.s.accel ? 1 : (LD41.s.brake ? -1 : 0);
             pcCar.steering = (LD41.s.turnLeft ? 1 : (LD41.s.turnRight ? -1 : 0)) * (pcCar.isGoingForward() ? 1 : -1);
 
-            for (Controller c : Controllers.getControllers()){
-                //System.out.println(c.getAxis(0) + " " + c.getAxis(1) + " " + c.getButton(0));
-                pcCar.acceleration = -c.getAxis(0);
-                pcCar.steering = -c.getAxis(1);
+            if (LD41.s.controllerEnabled) {
+                for (Controller c : Controllers.getControllers()) {
 
-                if (c.getButton(0)){
-                    pcCar.fireOilSlick();
+                    //for (int i=0;i<10;++i){
+                    //    System.out.println(i + "=" + c.getAxis(i));
+                    //}
 
-                    LD41.s.showingTitleScreen = false;
-                    started = true;
-                }
+                    //System.out.println(c.getAxis(0) + " " + c.getAxis(1) + " " + c.getButton(0));
+                    pcCar.acceleration = -c.getAxis(4);
+                    if (Math.abs(pcCar.acceleration) > 0.85f) pcCar.acceleration = pcCar.acceleration / Math.abs(pcCar.acceleration);
+                    pcCar.steering = Math.abs(c.getAxis(1)) >= 0.1f ? -c.getAxis(1) : 0;
 
-                if (c.getButton(1)){
-                    LD41.s.gs = new GameState();
-                    LD41.s.gs.init();
-                    LD41.s.gs.started = true;
-                    return;
+                    if (c.getButton(0)) pcCar.fireOilSlick();
                 }
             }
         }

@@ -6,6 +6,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -50,6 +52,8 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public Sprite fragment;
 	public Sprite smoke;
 	public Sprite gradient;
+
+	public boolean controllerEnabled = false;
 
 	public List<Sound> explosionSounds = new ArrayList<>();
 
@@ -140,6 +144,8 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 		Gdx.input.setInputProcessor(this);
 	}
 
+	boolean oldButton1Status;
+
 	@Override
 	public void render () {
 		if (MUSIC && (currentMusic == null || !currentMusic.isPlaying())){
@@ -156,6 +162,31 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			currentMusic.play();
 
 			System.out.println("Playing " + nextMusic);
+		}
+
+		if (LD41.s.showingTitleScreen){
+			for (Controller c : Controllers.getControllers()) {
+				for (int i=0;i<10;++i){
+					if (c.getButton(i)){
+						LD41.s.controllerEnabled = true;
+						LD41.s.showingTitleScreen = false;
+						LD41.s.gs.started = true;
+					}
+				}
+			}
+		}
+
+		if (LD41.s.controllerEnabled) {
+			for (Controller c : Controllers.getControllers()) {
+				if (c.getButton(1) && !oldButton1Status) {
+					LD41.s.gs = new GameState();
+					LD41.s.gs.init();
+					LD41.s.gs.started = true;
+					return;
+				}
+
+				oldButton1Status = c.getButton(1);
+			}
 		}
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
