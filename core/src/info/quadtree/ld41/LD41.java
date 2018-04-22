@@ -33,6 +33,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public static final boolean CHEATS = true;
 	public static final boolean DEBUG_PHYSICS = false;
 	public static final boolean MUSIC = false;
+	public static final boolean ENGINE_NOISE = false;
 
 	public Sprite carWheels;
 	public Sprite carBody;

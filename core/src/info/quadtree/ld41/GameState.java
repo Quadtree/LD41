@@ -170,24 +170,26 @@ public class GameState implements ContactListener {
             }
         }
 
-        if (pcCar != null){
-            float speed = pcCar.body.getLinearVelocity().len();
+        if (LD41.ENGINE_NOISE) {
+            if (pcCar != null) {
+                float speed = pcCar.body.getLinearVelocity().len();
 
-            if (Math.abs(speed) < 1){
-                if (engineNoiseInd != -1){
+                if (Math.abs(speed) < 1) {
+                    if (engineNoiseInd != -1) {
+                        LD41.s.engine.stop(engineNoiseInd);
+                        engineNoiseInd = -1;
+                    }
+                } else {
+                    if (engineNoiseInd == -1) engineNoiseInd = LD41.s.engine.loop();
+
+                    LD41.s.engine.setVolume(engineNoiseInd, MathUtils.clamp(speed / 10, 0, 1) * 0.35f);
+                    LD41.s.engine.setPitch(engineNoiseInd, MathUtils.clamp(0.5f + speed / 20, 0.5f, 2));
+                }
+            } else {
+                if (engineNoiseInd != -1) {
                     LD41.s.engine.stop(engineNoiseInd);
                     engineNoiseInd = -1;
                 }
-            } else {
-                if (engineNoiseInd == -1) engineNoiseInd = LD41.s.engine.loop();
-
-                LD41.s.engine.setVolume(engineNoiseInd, MathUtils.clamp(speed / 10, 0, 1) * 0.35f);
-                LD41.s.engine.setPitch(engineNoiseInd, MathUtils.clamp(0.5f + speed / 20, 0.5f, 2));
-            }
-        } else {
-            if (engineNoiseInd != -1){
-                LD41.s.engine.stop(engineNoiseInd);
-                engineNoiseInd = -1;
             }
         }
     }
