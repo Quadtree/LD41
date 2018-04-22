@@ -169,7 +169,7 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 			batch.draw(LD41.s.gradient, 0, Gdx.graphics.getHeight() - 350, Gdx.graphics.getWidth(), 350);
 
 			int y = 400;
-			Util.drawTextCentered("Last Car Standing", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + y);
+			Util.drawTextCentered("Funnel Race", bigFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + y);
 			Util.drawTextCentered("Outrun the wall of doom and be the last car standing!", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 130));
 			Util.drawTextCentered("WASD/Arrow Keys to move, Space to shoot oil bombs, R to restart", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 30));
 			Util.drawTextCentered("The bomb will auto-target at the car in the lead,", defaultFont, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + (y -= 30));
