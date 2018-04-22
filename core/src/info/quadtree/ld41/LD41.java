@@ -62,6 +62,8 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 	public List<Sound> oilSounds = new ArrayList<>();
 	public List<Sound> slipSounds = new ArrayList<>();
 
+	public List<Sound> hitSounds = new ArrayList<>();
+
 	public Sound getReadySound;
 	public Sound goSound;
 	public Sound engine;
@@ -105,6 +107,10 @@ public class LD41 extends ApplicationAdapter implements InputProcessor {
 
 		for (int i=0;i<3;++i){
 			slipSounds.add(Gdx.audio.newSound(Gdx.files.internal("slip" + i + ".wav")));
+		}
+
+		for (int i=0;i<5;++i){
+			hitSounds.add(Gdx.audio.newSound(Gdx.files.internal("hit" + i + ".wav")));
 		}
 
 		getReadySound = Gdx.audio.newSound(Gdx.files.internal("get_ready.wav"));

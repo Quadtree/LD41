@@ -162,6 +162,10 @@ public class Car extends Actor {
             Util.playRandomSound(LD41.s.slipSounds, body.getPosition().x, body.getPosition().y, 25);
         }
 
+        if (a instanceof Car){
+            Util.playRandomSound(LD41.s.hitSounds, body.getPosition().x, body.getPosition().y, 8);
+        }
+
         collidingWith.add(a);
     }
 
