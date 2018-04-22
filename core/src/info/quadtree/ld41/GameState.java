@@ -132,7 +132,7 @@ public class GameState implements ContactListener {
             final float TURN_SPEED = 0.02f;
 
             pcCar.acceleration = LD41.s.accel ? 1 : (LD41.s.brake ? -1 : 0);
-            pcCar.steering = LD41.s.turnLeft ? 1 : (LD41.s.turnRight ? -1 : 0);
+            pcCar.steering = (LD41.s.turnLeft ? 1 : (LD41.s.turnRight ? -1 : 0)) * (pcCar.isGoingForward() ? 1 : -1);
         }
 
         if (started) {

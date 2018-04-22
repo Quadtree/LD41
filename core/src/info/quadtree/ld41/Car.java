@@ -114,6 +114,10 @@ public class Car extends Actor {
         }
     }
 
+    public boolean isGoingForward(){
+        return body.getLinearVelocity().cpy().rotateRad(-body.getAngle()).x > 0;
+    }
+
     private void runAi(){
         Vector2 trgDest = new Vector2(body.getPosition().x, body.getPosition().y + 30);
 
