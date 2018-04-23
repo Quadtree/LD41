@@ -28,7 +28,7 @@ public class DesktopLauncher {
 			pixmap.dispose();
 		};
 
-		TexturePacker.processIfModified("../../raw_assets", ".", "main");
+		// TexturePacker.processIfModified("../../raw_assets", ".", "main");
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 1024;
